@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaileOfFriend.web", "TaileOfFriend.web\TaileOfFriend.web.csproj", "{1D25F52E-91E4-43EB-AFF7-53CED189B527}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaileOfFriend.DAL", "TaileOfFriend.DAL\TaileOfFriend.DAL.csproj", "{B653D3CD-5863-48A7-8239-7A55BE3A9190}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaileOfFriend.DAL", "TaileOfFriend.DAL\TaileOfFriend.DAL.csproj", "{B653D3CD-5863-48A7-8239-7A55BE3A9190}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaileOfFriend.BLL", "TaileOfFriend.BLL\TaileOfFriend.BLL.csproj", "{30FB5C79-7761-4E3A-8762-97B6CE548539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaileOfFriend.BLL", "TaileOfFriend.BLL\TaileOfFriend.BLL.csproj", "{30FB5C79-7761-4E3A-8762-97B6CE548539}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
