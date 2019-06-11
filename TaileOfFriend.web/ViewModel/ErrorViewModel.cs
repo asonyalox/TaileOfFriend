@@ -1,6 +1,9 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace TaileOfFriend.web.Models
+namespace TaileOfFriend.web.ViewModel
 {
     public class ErrorViewModel
     {

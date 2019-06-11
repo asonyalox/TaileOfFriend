@@ -16,10 +16,9 @@ namespace TaileOfFriend.DAL.Repositories
 
         }
 
-        public  override IEnumerable<Category> GetAll()
-        {
-            return context.Categories;
-        }
+        
 
-    } 
+
+    }
+
 }
