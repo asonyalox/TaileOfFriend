@@ -29,7 +29,8 @@ namespace TaileOfFriend.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email, PhoneNumber = model.PhoneNumber, BirthDate = model.BirthDate, Description = model.Description };
+                User user = new User { Email = model.Email, UserName = model.Email 
+                };
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

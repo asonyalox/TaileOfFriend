@@ -12,20 +12,7 @@ namespace TaileOfFriend.web.ViewModel
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Номер телефона")]
-        public string PhoneNumber { get; set; }
-
-        [Required]
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Год рождения")]
-        public DateTime BirthDate { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Опишите свои хобби")]
-        public string Description { get; set; }
-
+        
 
         [Required]
         [DataType(DataType.Password)]
