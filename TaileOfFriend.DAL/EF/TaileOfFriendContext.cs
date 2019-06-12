@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace TaileOfFriend.DAL.Enteties
 {
@@ -12,10 +13,20 @@ namespace TaileOfFriend.DAL.Enteties
         public DbSet<Event> Events { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<User> Userse { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Image> Images { get; set; }
+       
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().HasData(
+                new IdentityRole() {Name="Admin", NormalizedName="Admin".ToUpper() },
+                new IdentityRole() { Name = "User", NormalizedName = "User".ToUpper() }
+                );
 
             modelBuilder.Entity<UserCategory>()
                 .HasKey(t => new { t.CategoryId, t.UserId });
@@ -50,7 +61,7 @@ namespace TaileOfFriend.DAL.Enteties
         public TaileOfFriendContext(DbContextOptions<TaileOfFriendContext> options)
             : base(options)
         {
-
+            Database.Migrate();
         }
     }
 }

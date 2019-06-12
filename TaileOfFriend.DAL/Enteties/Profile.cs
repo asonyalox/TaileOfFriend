@@ -11,7 +11,7 @@ namespace TaileOfFriend.DAL.Enteties
         [Key]
         [ForeignKey("User")]
         public string Id { get; set; }
-
+        public string Name { get; set; }
         [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
         public Location Location { get; set; }

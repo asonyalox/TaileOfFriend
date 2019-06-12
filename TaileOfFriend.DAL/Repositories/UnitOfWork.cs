@@ -17,6 +17,8 @@ namespace TaileOfFriend.DAL.Repositories
         public UserManager<User> UserManager { get; private set; }
         public SignInManager<User> SignInManager { get; private set; }
 
+        public IProfileRepository ProfileManager { get; }
+        public IImageRepository Images { get; }
         public ICategoryRepository Categories { get; }
         public IEventRepository Events { get; }
         public ILocationRepository Lockations { get; }
@@ -47,6 +49,6 @@ namespace TaileOfFriend.DAL.Repositories
             await context.SaveChangesAsync();
         }
 
-       
+        
     }
 }
