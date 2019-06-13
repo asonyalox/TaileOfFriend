@@ -27,36 +27,38 @@ namespace TaileOfFriend.BLL.Services
             User user = await Database.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null)
             {
-                user = new User { Email = userDto.Email, UserName = userDto.Email };
+                user = new User { Email = userDto.Email, PhoneNumber=userDto.Phone, UserName = userDto.Email };
                 var result = await Database.UserManager.CreateAsync(user, userDto.Password);
                 if (result.Errors.Count() > 0)
                     return new OperationDetails(false, result.Errors.FirstOrDefault().ToString(), "");
                 // Роль добавкка
                 await Database.UserManager.AddToRoleAsync(user, userDto.Role);
                 //Profile
-                Profile profile = new Profile { Id = user.Id, Location = userDto.Location, Name = userDto.Name };
-                Database.ProfileManager.Create(profile);
-                await Database.SaveAsync();
-                return new OperationDetails(true, "Реєстрація відбулась успішно", "");
-            }
-            else
+                Profile profile = new Profile { Id = user.Id,  Birthday=userDto.Birthday};
+               
+            };
+
+            var p = new Profile
             {
-                return new OperationDetails(false,"Користувач з таким емейлом вже існує","Email")
+                UserId = user.Id;
+
+            };
+
+            if (userDto.Location != null)
+            {
+
+                p.Location location = Database.Lockations.All()
+                    .Where(l => l.Loc == userDto.Location.Loc).FirstOrDefault() ??
+                    userDto.Location;
+
+
             }
 
             
+            
         }
 
-        public async Task<ClaimsIdentity>Authenticate(UserDTO userDto)
-        {
-            ClaimsIdentity claim = null;
-            //Знаходимо користувача
-            User user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
-            // Авторизумємо і повертаємо обєкт ClaimsIdentity
-            if (user != null)
-                claim = await Database.UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            return claim;
-        }
+       
 
 
     }

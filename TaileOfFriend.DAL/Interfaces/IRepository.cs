@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace TaileOfFriend.DAL.Interfaces
@@ -9,7 +10,8 @@ namespace TaileOfFriend.DAL.Interfaces
     {
         IEnumerable<T> GetAll();
         T GetById(int id);
-        
+
+        IQueryable<T> All();
         void Insert(T item);
         void Update(T item);
         void Delete(T item);

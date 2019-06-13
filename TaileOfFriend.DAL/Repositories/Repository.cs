@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using TaileOfFriend.DAL.Interfaces;
-using TaileOfFriend.DAL.Enteties;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Linq;
 using System.Linq.Expressions;
+using TaileOfFriend.DAL.Enteties;
 
 namespace TaileOfFriend.DAL.Repositories
 {
@@ -14,6 +14,9 @@ namespace TaileOfFriend.DAL.Repositories
     {
         protected readonly TaileOfFriendContext context;
         private readonly DbSet<T> dbset;
+
+        public IQueryable<T> Entities { get; private set; }
+        public IQueryable<T> All() => dbset;
 
         public Repository(TaileOfFriendContext mainDbContext)
         {
@@ -55,5 +58,7 @@ namespace TaileOfFriend.DAL.Repositories
             }
             dbset.Remove(item);
         }
+
+        
     }
 }
