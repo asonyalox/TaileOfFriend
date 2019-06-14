@@ -7,8 +7,6 @@ namespace TaileOfFriend.DAL.Interfaces
 {
     public interface IProfileRepository:IRepository<Profile>
     {
-        void Create(Profile profile);
-        Profile FindById(string id);
-        User FindByUserName(string UserName)
+        Profile GetById(string id);
     }
 }

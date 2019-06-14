@@ -41,6 +41,11 @@ namespace TaileOfFriend.DAL.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new { Id = "32ea7b63-d60f-4cd8-b9d5-91cc5a995aef", ConcurrencyStamp = "2f690938-6dec-4ea4-a35c-dc75e73d55e0", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "a3adee95-d749-49db-b13d-5982e748a442", ConcurrencyStamp = "4e46992d-834c-473c-9932-620529005f7e", Name = "User", NormalizedName = "USER" }
+                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -192,7 +197,7 @@ namespace TaileOfFriend.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("TaileOfFriend.DAL.Enteties.Location", b =>
@@ -210,7 +215,7 @@ namespace TaileOfFriend.DAL.Migrations
 
             modelBuilder.Entity("TaileOfFriend.DAL.Enteties.Profile", b =>
                 {
-                    b.Property<string>("Id");
+                    b.Property<string>("UserId");
 
                     b.Property<DateTime>("Birthday");
 
@@ -218,13 +223,15 @@ namespace TaileOfFriend.DAL.Migrations
 
                     b.Property<int?>("LocationId");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Name");
+
+                    b.HasKey("UserId");
 
                     b.HasIndex("ImageId");
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("Profile");
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("TaileOfFriend.DAL.Enteties.User", b =>
@@ -241,8 +248,6 @@ namespace TaileOfFriend.DAL.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<int?>("LocationId");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -268,8 +273,6 @@ namespace TaileOfFriend.DAL.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -345,7 +348,7 @@ namespace TaileOfFriend.DAL.Migrations
             modelBuilder.Entity("TaileOfFriend.DAL.Enteties.Event", b =>
                 {
                     b.HasOne("TaileOfFriend.DAL.Enteties.Location", "Location")
-                        .WithMany("Events")
+                        .WithMany()
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -365,11 +368,6 @@ namespace TaileOfFriend.DAL.Migrations
 
             modelBuilder.Entity("TaileOfFriend.DAL.Enteties.Profile", b =>
                 {
-                    b.HasOne("TaileOfFriend.DAL.Enteties.User", "User")
-                        .WithOne("Profile")
-                        .HasForeignKey("TaileOfFriend.DAL.Enteties.Profile", "Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("TaileOfFriend.DAL.Enteties.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
@@ -377,13 +375,11 @@ namespace TaileOfFriend.DAL.Migrations
                     b.HasOne("TaileOfFriend.DAL.Enteties.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
-                });
 
-            modelBuilder.Entity("TaileOfFriend.DAL.Enteties.User", b =>
-                {
-                    b.HasOne("TaileOfFriend.DAL.Enteties.Location")
-                        .WithMany("Users")
-                        .HasForeignKey("LocationId");
+                    b.HasOne("TaileOfFriend.DAL.Enteties.User", "User")
+                        .WithOne("Profile")
+                        .HasForeignKey("TaileOfFriend.DAL.Enteties.Profile", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TaileOfFriend.DAL.Enteties.UserCategory", b =>

@@ -13,7 +13,7 @@ namespace TaileOfFriend.DAL.Repositories
     public class Repository<T>:IRepository<T> where T:class
     {
         protected readonly TaileOfFriendContext context;
-        private readonly DbSet<T> dbset;
+        protected readonly DbSet<T> dbset;
 
         public IQueryable<T> Entities { get; private set; }
         public IQueryable<T> All() => dbset;

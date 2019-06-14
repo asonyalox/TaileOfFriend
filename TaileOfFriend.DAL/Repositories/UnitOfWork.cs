@@ -17,7 +17,7 @@ namespace TaileOfFriend.DAL.Repositories
         public UserManager<User> UserManager { get; private set; }
         public SignInManager<User> SignInManager { get; private set; }
 
-        public IProfileRepository ProfileManager { get; }
+        public IProfileRepository ProfileRepository { get; }
         public IImageRepository Images { get; }
         public ICategoryRepository Categories { get; }
         public IEventRepository Events { get; }

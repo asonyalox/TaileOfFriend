@@ -15,7 +15,7 @@ namespace TaileOfFriend.DAL.Interfaces
 
         UserManager<User> UserManager { get; }
 
-        IProfileRepository ProfileManager { get; }
+        IProfileRepository ProfileRepository { get; }
         IImageRepository Images { get; }
         ICategoryRepository Categories { get; }
         IEventRepository Events { get; }

@@ -12,7 +12,7 @@ namespace TaileOfFriend.DAL.Enteties
         public DbSet<Category> Categories { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<User> Userse { get; set; }
+        //public DbSet<User> Userse { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Image> Images { get; set; }
        
@@ -23,7 +23,7 @@ namespace TaileOfFriend.DAL.Enteties
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().HasData(
+            modelBuilder.Entity<IdentityRole>().HasData(
                 new IdentityRole() {Name="Admin", NormalizedName="Admin".ToUpper() },
                 new IdentityRole() { Name = "User", NormalizedName = "User".ToUpper() }
                 );

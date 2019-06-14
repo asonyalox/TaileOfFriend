@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using TaileOfFriend.DAL.Enteties;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace TaileOfFriend.BLL.Services
 {
@@ -22,44 +23,87 @@ namespace TaileOfFriend.BLL.Services
             Database = uow;
         }
 
-        public async Task<OperationDetails> Create(UserDTO userDto)
+        public async Task<OperationDetails> CreateAsync(UserDTO userDto)
         {
-            User user = await Database.UserManager.FindByEmailAsync(userDto.Email);
-            if (user == null)
+            if(await Database.UserManager.FindByEmailAsync(userDto.Email) != null)
             {
-                user = new User { Email = userDto.Email, PhoneNumber=userDto.Phone, UserName = userDto.Email };
-                var result = await Database.UserManager.CreateAsync(user, userDto.Password);
-                if (result.Errors.Count() > 0)
-                    return new OperationDetails(false, result.Errors.FirstOrDefault().ToString(), "");
-                // Роль добавкка
-                await Database.UserManager.AddToRoleAsync(user, userDto.Role);
-                //Profile
-                Profile profile = new Profile { Id = user.Id,  Birthday=userDto.Birthday};
-               
+                return new OperationDetails(false, "Такий Емейл вже зареєстровано", "Email");
+            }
+
+            User user = new User
+            {
+                Email = userDto.Email,
+                UserName = userDto.UserName,
+                PhoneNumber = userDto.Phone
             };
 
-            var p = new Profile
-            {
-                UserId = user.Id;
+            var result = await Database.UserManager.CreateAsync(user, userDto.Password);
 
+            if (result.Errors.Count() > 0)
+            {
+                return new OperationDetails(false, result.Errors.FirstOrDefault().ToString(), "");
+            }
+
+            //Добавляємо роль
+
+            await Database.UserManager.AddToRoleAsync(user, userDto.Role);
+
+            Profile profile = new Profile
+            {
+                UserId = user.Id,
+                Birthday = userDto.Birthday,
             };
+            
 
             if (userDto.Location != null)
             {
 
-                p.Location location = Database.Lockations.All()
+                Location location = Database.Lockations.All()
                     .Where(l => l.Loc == userDto.Location.Loc).FirstOrDefault() ??
                     userDto.Location;
 
-
+                profile.Location = location;
             }
 
+            Database.ProfileRepository.Insert(profile);
             
+        
+
+            await Database.SaveAsync();
+
+            return new OperationDetails(true, "Реєстрація пройшла успішно", "");
             
         }
 
-       
+       public async Task<bool> AuthenticateAsync(UserDTO userDto)
+        {
+            User user = await Database.UserManager.FindByEmailAsync(userDto.Email);
+            var result = await Database.SignInManager.PasswordSignInAsync(user.UserName, userDto.Password, false, lockoutOnFailure: false);
+            return result.Succeeded;
+        }
 
+        public async Task<User> GetCurrentUserAsync(HttpContext context)
+        {
+            return await Database.UserManager.GetUserAsync(context.User);
+        }
+
+        public async Task SignOutAsync()
+        {
+            await Database.SignInManager.SignOutAsync();
+        }
+
+        public async Task AdminSeedAsync(UserDTO adminDto)
+        {
+            if (!Database.UserManager.Users.Any())
+            {
+                await CreateAsync(adminDto);
+            }
+        }
+
+        public void Dispose()
+        {
+            Database.Dispose();
+        }
 
     }
 }

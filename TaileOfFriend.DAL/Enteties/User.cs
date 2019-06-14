@@ -10,6 +10,8 @@ namespace TaileOfFriend.DAL.Enteties
 {
    public class User: IdentityUser
     {
+
+        
         public Profile Profile { get; set; }
         public List<UserCategory> UserCategories { get; set; }
     }
