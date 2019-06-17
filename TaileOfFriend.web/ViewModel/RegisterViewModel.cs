@@ -12,7 +12,8 @@ namespace TaileOfFriend.web.ViewModel
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        
+        [Required]
+        public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
