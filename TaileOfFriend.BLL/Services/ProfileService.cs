@@ -30,12 +30,13 @@ namespace TaileOfFriend.BLL.Services
             {
                 response.Add(new ProfileDTO
                 {
-                    Username = p.User.UserName,
+                    UserName = p.User.UserName,
                     Email = p.User.Email,
                     PhoneNumber = p.User.PhoneNumber,
                     Birthday = p.Birthday,
                     Location = p.Location.Loc,
-                    ImageUrl = p.Image?.Url
+                    ImageUrl = p.Image?.Url,
+                    Gender=p.User.Gender
                 });
             }
 
@@ -49,12 +50,13 @@ namespace TaileOfFriend.BLL.Services
 
             return new ProfileDTO
             {
-                Username = u.UserName,
+                UserName = u.UserName,
                 Email = u.Email,
                 PhoneNumber = u.PhoneNumber,
                 Birthday = p.Birthday,
-                Location=p.Location.Loc,
-                ImageUrl = p.Image?.Url
+                Location=p.Location?.Loc,
+                ImageUrl = p.Image?.Url,
+                Gender=p.Gender
             };
         }
 

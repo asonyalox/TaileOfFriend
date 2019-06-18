@@ -17,7 +17,7 @@ namespace TaileOfFriend.DAL.Enteties
 
         public List<EventCategory> EventCategories { get; set; }
 
-        public int LocationId { get; set; }
+        
         public Location Location { get; set; }
     }
 }

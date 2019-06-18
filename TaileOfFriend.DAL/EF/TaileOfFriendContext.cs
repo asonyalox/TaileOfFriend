@@ -28,17 +28,17 @@ namespace TaileOfFriend.DAL.Enteties
                 new IdentityRole() { Name = "User", NormalizedName = "User".ToUpper() }
                 );
 
-            modelBuilder.Entity<UserCategory>()
-                .HasKey(t => new { t.CategoryId, t.UserId });
+            modelBuilder.Entity<ProfileCategory>()
+                .HasKey(t => new { t.CategoryId, t.ProfileId });
 
-            modelBuilder.Entity<UserCategory>()
-                .HasOne(pt => pt.User)
-                .WithMany(p => p.UserCategories)
-                .HasForeignKey(pt => pt.UserId);
+            modelBuilder.Entity<ProfileCategory>()
+                .HasOne(pt => pt.ProfileId)
+                .WithMany(p => p.ProfileCategories)
+                .HasForeignKey(pt => pt.ProfileId);
 
-            modelBuilder.Entity<UserCategory>()
+            modelBuilder.Entity<ProfileCategory>()
                 .HasOne(pt => pt.Category)
-                .WithMany(t => t.UserCategories)
+                .WithMany(t => t.ProfileCategories)
                 .HasForeignKey(pt => pt.CategoryId);
 
             modelBuilder.Entity<EventCategory>()

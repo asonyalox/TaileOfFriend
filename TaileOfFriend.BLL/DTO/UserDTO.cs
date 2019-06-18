@@ -17,6 +17,7 @@ namespace TaileOfFriend.BLL.DTO
         public string Role { get; set; }
         public Image Avatar { get; set; }
         public Location Location { get; set; }
+        public Gender Gender { get; set; }
 
     }
 }

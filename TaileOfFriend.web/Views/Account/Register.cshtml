@@ -1,4 +1,5 @@
-﻿@model TaileOfFriend.web.ViewModel.RegisterViewModel
+﻿@using TaileOfFriend.DAL.Enteties
+@model TaileOfFriend.web.ViewModel.RegisterViewModel
 
 <h2>Регистрация нового пользователя</h2>
 <form method="post" asp-controller="Account" asp-action="Register">
@@ -8,20 +9,37 @@
         <input asp-for="Email" />
         <span asp-validation-for="Email"></span>
     </div>
-    
-    
-    
+
+    <div>
+        <label asp-for="Birthday"></label><br />
+        <input asp-for="Birthday" />
+        <span asp-validation-for="Birthday"></span>
+    </div>
+
+    <div>
+        <label asp-for="Gender"></label><br />
+        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>() " class="form-control">
+            <option selected="selected" value="Male"></option>
+        </select>
+
+    </div>
+
     <div>
         <label asp-for="Password"></label><br />
         <input asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
+
+
+
     <div>
         <label asp-for="PasswordConfirm"></label><br />
         <input asp-for="PasswordConfirm" />
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
+
     <div>
         <input type="submit" value="Регистрация" />
     </div>
+
 </form>

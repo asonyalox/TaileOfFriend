@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using TaileOfFriend.DAL.Enteties;
 
 namespace TaileOfFriend.web.ViewModel
 {
@@ -13,7 +14,12 @@ namespace TaileOfFriend.web.ViewModel
         public string Email { get; set; }
 
         [Required]
-        public string Login { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Год рождения")]
+        public DateTime Birthday { get; set; }
+
+        [Required]
+        public Gender Gender { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

@@ -34,7 +34,8 @@ namespace TaileOfFriend.web.Controllers
                 ImageUrl = profile.ImageUrl,
                 UserName = profile.UserName,
                 Email = profile.Email,
-                Age = profile.Birthday.Year - DateTime.Today.Year,
+                Age = DateTime.Today.Year - profile.Birthday.Year,
+                Location =profile.Location,
                 
             };
 

@@ -33,8 +33,9 @@ namespace TaileOfFriend.BLL.Services
             User user = new User
             {
                 Email = userDto.Email,
-                UserName = userDto.UserName,
-                PhoneNumber = userDto.Phone
+                UserName = userDto.Email,
+                PhoneNumber = userDto.Phone,
+                Gender=userDto.Gender,
             };
 
             var result = await Database.UserManager.CreateAsync(user, userDto.Password);
@@ -58,7 +59,7 @@ namespace TaileOfFriend.BLL.Services
             if (userDto.Location != null)
             {
 
-                Location location = Database.Lockations.All()
+                Location location = Database.Locations.All()
                     .Where(l => l.Loc == userDto.Location.Loc).FirstOrDefault() ??
                     userDto.Location;
 

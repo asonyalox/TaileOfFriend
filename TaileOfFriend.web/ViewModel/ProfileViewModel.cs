@@ -13,6 +13,6 @@ namespace TaileOfFriend.web.ViewModel
 
         public string ImageUrl { get; set; }
         public int Age { get; set; }
-        public Location Location { get; set; }
+        public string Location { get; set; }
     }
 }

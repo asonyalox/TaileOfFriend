@@ -8,8 +8,7 @@ using TaileOfFriend.BLL.Interfaces;
 
 namespace TaileOfFriend.web.Controllers
 {
-    public class AdminController : Controller
-    {
+    
         [Authorize(Roles = "Admin")]
         public class AdminController : Controller
         {
@@ -26,5 +25,5 @@ namespace TaileOfFriend.web.Controllers
 
             public IActionResult Users() => View(ProfileService.Users());
         }
-    }
+    
 }

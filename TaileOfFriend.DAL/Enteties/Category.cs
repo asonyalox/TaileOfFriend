@@ -9,7 +9,7 @@ namespace TaileOfFriend.DAL.Enteties
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<UserCategory> UserCategories { get; set; }
+        public List<ProfileCategory> ProfileCategories { get; set; }
 
         public List<EventCategory> EventCategories { get; set; }
     }

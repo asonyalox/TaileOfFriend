@@ -4,13 +4,13 @@ using System.Text;
 
 namespace TaileOfFriend.DAL.Enteties
 {
-    public class UserCategory
+    public class ProfileCategory
     {
-        public int Id { get; set; }
+       
 
 
-        public string UserId { get; set; }
-        public User User { get; set; }
+        public string ProfileId { get; set; }
+        public Profile Profile{ get; set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }

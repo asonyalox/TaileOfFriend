@@ -11,13 +11,15 @@ namespace TaileOfFriend.DAL.Enteties
         [Key]
         [ForeignKey("User")]
         public string UserId { get; set; }
+        public virtual User User { get; set; }
+
         public string Name { get; set; }
         [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
         public Location Location { get; set; }
         public Image Image { get; set; }
 
-        public virtual User User { get; set; }
-
+        public virtual List<ProfileCategory> ProfileCategories { get; set; }
+        public Gender Gender { get; set; }
     }
 }

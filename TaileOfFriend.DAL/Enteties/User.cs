@@ -8,11 +8,16 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TaileOfFriend.DAL.Enteties
 {
+    public enum Gender
+    {
+        Male,
+        Female,
+        Other,
+    }
    public class User: IdentityUser
     {
-
         
         public Profile Profile { get; set; }
-        public List<UserCategory> UserCategories { get; set; }
+        
     }
 }

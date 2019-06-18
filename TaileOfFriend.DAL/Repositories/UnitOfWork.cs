@@ -9,19 +9,49 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TaileOfFriend.DAL.Repositories
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
-        public  TaileOfFriendContext context { get; private set; }
+        public  TaileOfFriendContext Context { get; private set; }
 
         public RoleManager<IdentityRole> RoleManager { get; private set; }
         public UserManager<User> UserManager { get; private set; }
         public SignInManager<User> SignInManager { get; private set; }
 
-        public IProfileRepository ProfileRepository { get; }
-        public IImageRepository Images { get; }
-        public ICategoryRepository Categories { get; }
-        public IEventRepository Events { get; }
-        public ILocationRepository Lockations { get; }
+        public IProfileRepository profileRepositories;
+        private IImageRepository images;
+        public ICategoryRepository categories;
+        public IEventRepository Events;
+        public ILocationRepository lockations;
+
+        public UnitOfWork(
+            TaileOfFriendContext db,
+            SignInManager<User> signInManager,
+            UserManager<User> userManager,
+            RoleManager<IdentityRole> roleManager)
+        {
+            Context = db;
+
+            UserManager = userManager;
+            RoleManager = roleManager;
+            SignInManager = signInManager;
+        }
+
+
+        public IProfileRepository ProfileRepository =>
+            profileRepositories ?? (profileRepositories = new ProfileRepository(Context));
+
+        public ILocationRepository Locations =>
+            lockations ?? (lockations = new LocationRepository(Context));
+
+        
+
+        public ICategoryRepository Categories =>
+           categories ?? (categories = new CategoryRepository(Context));
+
+        public IImageRepository Images =>
+            images ?? (images = new ImageRepository(Context));
+
+        
 
         public void Dispose()
         {
@@ -46,7 +76,7 @@ namespace TaileOfFriend.DAL.Repositories
 
         public async Task SaveAsync()
         {
-            await context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
 
         

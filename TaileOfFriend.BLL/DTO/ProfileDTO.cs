@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TaileOfFriend.DAL.Enteties;
 
 namespace TaileOfFriend.BLL.DTO
 {
@@ -13,5 +14,6 @@ namespace TaileOfFriend.BLL.DTO
         public string ImageUrl { get; set;}
         public DateTime Birthday { get; set; }
         public string Location { get; set; }
+        public Gender Gender { get; set; }
     }
 }

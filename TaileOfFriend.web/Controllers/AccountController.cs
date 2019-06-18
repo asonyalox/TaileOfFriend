@@ -34,12 +34,13 @@ namespace TaileOfFriend.web.Controllers
                 UserDTO userDto = new UserDTO
                 {
                     Email = model.Email,
-                    Password = model.Password
+                    Password = model.Password,
+                    
                 };
                 bool auth = await _userService.AuthenticateAsync(userDto);
                 if (auth)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Profile");
                 }
             }
             ModelState.AddModelError("", "Емейл чи пароль невірний");
@@ -59,10 +60,11 @@ namespace TaileOfFriend.web.Controllers
                     Email = model.Email,
                     Password = model.Password,
                     Role = "user",
-
+                    Gender=model.Gender,
+                    Birthday=model.Birthday,
                 };
 
-                OperationDetails operationDetails = await _userService.CreateAsync(userDto;)
+                OperationDetails operationDetails = await _userService.CreateAsync(userDto);
                 
                 if (operationDetails.Succedeed)
                 {

@@ -13,7 +13,12 @@ namespace TaileOfFriend.web.ViewModel
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+       
 
+        [Required]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Рік народження")]
+        public DateTime BirthDate { get; set; }
 
 
         [Required]
