@@ -16,7 +16,7 @@ namespace TaileOfFriend.DAL.Enteties
     }
    public class User: IdentityUser
     {
-        
+        public string ProfileId { get; set; }
         public Profile Profile { get; set; }
         
     }

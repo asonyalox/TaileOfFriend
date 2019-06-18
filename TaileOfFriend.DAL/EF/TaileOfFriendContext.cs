@@ -12,7 +12,6 @@ namespace TaileOfFriend.DAL.Enteties
         public DbSet<Category> Categories { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Location> Locations { get; set; }
-        //public DbSet<User> Userse { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Image> Images { get; set; }
        
@@ -31,7 +30,7 @@ namespace TaileOfFriend.DAL.Enteties
             modelBuilder.Entity<ProfileCategory>()
                 .HasKey(t => new { t.CategoryId, t.ProfileId });
 
-            modelBuilder.Entity<ProfileCategory>()
+             modelBuilder.Entity<ProfileCategory>()
                 .HasOne(pt => pt.ProfileId)
                 .WithMany(p => p.ProfileCategories)
                 .HasForeignKey(pt => pt.ProfileId);

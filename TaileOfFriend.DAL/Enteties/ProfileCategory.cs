@@ -12,7 +12,7 @@ namespace TaileOfFriend.DAL.Enteties
         public string ProfileId { get; set; }
         public Profile Profile{ get; set; }
 
-        public int CategoryId { get; set; }
+        public string CategoryId { get; set; }
         public Category Category { get; set; }
     }
 }

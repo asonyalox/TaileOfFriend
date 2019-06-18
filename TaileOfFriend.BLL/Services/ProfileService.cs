@@ -36,7 +36,7 @@ namespace TaileOfFriend.BLL.Services
                     Birthday = p.Birthday,
                     Location = p.Location.Loc,
                     ImageUrl = p.Image?.Url,
-                    Gender=p.User.Gender
+                    
                 });
             }
 

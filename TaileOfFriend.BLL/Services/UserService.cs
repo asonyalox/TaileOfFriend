@@ -35,7 +35,7 @@ namespace TaileOfFriend.BLL.Services
                 Email = userDto.Email,
                 UserName = userDto.Email,
                 PhoneNumber = userDto.Phone,
-                Gender=userDto.Gender,
+                
             };
 
             var result = await Database.UserManager.CreateAsync(user, userDto.Password);
@@ -53,6 +53,7 @@ namespace TaileOfFriend.BLL.Services
             {
                 UserId = user.Id,
                 Birthday = userDto.Birthday,
+                Gender = userDto.Gender,
             };
             
 
