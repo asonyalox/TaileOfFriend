@@ -4,9 +4,9 @@ using System.Text;
 
 namespace TaileOfFriend.DAL.Enteties
 {
-    public class Category
+    public class Category:BaseEntity
     {
-        public string Id { get; set; }
+        
         public string Name { get; set; }
 
         public List<ProfileCategory> ProfileCategories { get; set; }

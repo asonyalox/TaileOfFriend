@@ -4,9 +4,9 @@ using System.Text;
 
 namespace TaileOfFriend.DAL.Enteties
 {
-    public class EventImage
+    public class EventImage:BaseEntity
     {
-        public int Id { get; set; }
+        
 
         public Event Event { get; set; }
         public Image Image { get; set; }

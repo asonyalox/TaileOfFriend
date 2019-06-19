@@ -31,7 +31,7 @@ namespace TaileOfFriend.DAL.Enteties
                 .HasKey(t => new { t.CategoryId, t.ProfileId });
 
              modelBuilder.Entity<ProfileCategory>()
-                .HasOne(pt => pt.ProfileId)
+                .HasOne(pt => pt.Profile)
                 .WithMany(p => p.ProfileCategories)
                 .HasForeignKey(pt => pt.ProfileId);
 

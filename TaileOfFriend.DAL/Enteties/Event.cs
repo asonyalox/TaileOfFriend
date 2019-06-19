@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TaileOfFriend.DAL.Enteties
 {
-   public class Event
+   public class Event:BaseEntity
     {
-        public int Id { get; set; }
+        
         public string Photos { get; set; }
         public string Category { get; set; }
         [DataType(DataType.Date)]

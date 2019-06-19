@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TaileOfFriend.DAL.Enteties
 {
-    public class ProfileCategory
+    public class ProfileCategory:BaseEntity
     {
        
 

@@ -16,7 +16,7 @@ namespace TaileOfFriend.BLL.Services
 {
     public class UserService:IUserService
     {
-        IUnitOfWork Database { get; set; }
+       public IUnitOfWork Database { get; set; }
 
         public UserService(IUnitOfWork uow)
         {

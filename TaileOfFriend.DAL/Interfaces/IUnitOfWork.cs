@@ -20,6 +20,7 @@ namespace TaileOfFriend.DAL.Interfaces
         ICategoryRepository Categories { get; }
         //IEventRepository Events { get; }
         ILocationRepository Locations { get; }
+        
 
         Task SaveAsync();
 

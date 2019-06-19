@@ -4,14 +4,8 @@ using System.Text;
 
 namespace TaileOfFriend.DAL.Enteties
 {
-   public class Location:BaseEntity
+    public class BaseEntity
     {
-        
-        public string Loc { get; set; }
-
-        
-        
-
-
+        public int Id { get; set; }
     }
 }
