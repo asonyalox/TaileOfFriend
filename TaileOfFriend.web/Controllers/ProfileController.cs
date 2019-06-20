@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using TaileOfFriend.BLL.Interfaces;
 using TaileOfFriend.DAL.Enteties;
 using TaileOfFriend.web.ViewModel;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using TaileOfFriend.BLL.DTO;
 
 namespace TaileOfFriend.web.Controllers
 {
@@ -13,14 +16,18 @@ namespace TaileOfFriend.web.Controllers
     {
         private IProfileService _profileService;
         private IUserService _userService;
+        private IFileService _fileService;
+        
 
         public ProfileController(
             IProfileService profileSrv,
-            IUserService userSrv
+            IUserService userSrv,
+            IFileService fileSrv
             )
         {
             _profileService = profileSrv;
             _userService = userSrv;
+            _fileService = fileSrv;
         }
 
         public async Task<IActionResult> Index()
@@ -41,5 +48,7 @@ namespace TaileOfFriend.web.Controllers
 
             return View(viewModel);
         }
+
+        
     }
 }

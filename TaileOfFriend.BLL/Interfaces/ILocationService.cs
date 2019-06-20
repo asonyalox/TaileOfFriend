@@ -5,16 +5,15 @@ using System.Threading.Tasks;
 using TaileOfFriend.BLL.Infrasrtucture;
 using TaileOfFriend.DAL.Enteties;
 
-
 namespace TaileOfFriend.BLL.Interfaces
 {
-    public interface ICategoryService
+    public interface ILocationService
     {
-        IEnumerable<Category> GetAllCategories();
-        Category GetById(int id);
+         IEnumerable<Location> GetAllLocations();
+        Location GetById(int id);
 
-        Task<OperationDetails> CreateAsync(Category category);
-        Task<OperationDetails> EditAsync(Category category);
+        Task<OperationDetails> CreateAsync(Location location);
+        
         Task<OperationDetails> DeleteAsync(int id);
     }
 }

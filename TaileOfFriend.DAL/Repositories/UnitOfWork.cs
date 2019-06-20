@@ -20,15 +20,16 @@ namespace TaileOfFriend.DAL.Repositories
         public IProfileRepository profileRepositories;
         private IImageRepository images;
         public ICategoryRepository categories;
-       // public IEventRepository Events;
+        //public IEventRepository Events;
         public ILocationRepository lockations;
 
         public UnitOfWork(
             TaileOfFriendContext db,
             SignInManager<User> signInManager,
             UserManager<User> userManager,
-            RoleManager<IdentityRole> roleManager,
-            ICategoryRepository categoryRepository)
+            RoleManager<IdentityRole> roleManager
+            
+            )
         {
             Context = db;
 
@@ -36,7 +37,7 @@ namespace TaileOfFriend.DAL.Repositories
             RoleManager = roleManager;
             SignInManager = signInManager;
 
-            categories = categoryRepository;
+            
         }
 
 
@@ -45,8 +46,6 @@ namespace TaileOfFriend.DAL.Repositories
 
         public ILocationRepository Locations =>
             lockations ?? (lockations = new LocationRepository(Context));
-
-        
 
         public ICategoryRepository Categories =>
            categories ?? (categories = new CategoryRepository(Context));

@@ -74,6 +74,8 @@ namespace TaileOfFriend.web
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IProfileService, ProfileService>();
+
+            services.AddTransient<IFileService, FileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
