@@ -20,7 +20,7 @@ namespace TaileOfFriend.DAL.Repositories
         public IProfileRepository profileRepositories;
         private IImageRepository images;
         public ICategoryRepository categories;
-        //public IEventRepository Events;
+        public IEventRepository events;
         public ILocationRepository lockations;
 
         public UnitOfWork(
@@ -53,7 +53,8 @@ namespace TaileOfFriend.DAL.Repositories
         public IImageRepository Images =>
             images ?? (images = new ImageRepository(Context));
 
-        
+        public IEventRepository Events =>
+            events ?? (events = new EventRepository(Context));
 
         public void Dispose()
         {

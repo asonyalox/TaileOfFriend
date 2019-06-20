@@ -7,7 +7,7 @@ namespace TaileOfFriend.DAL.Enteties
 {
    public class Event:BaseEntity
     {
-        
+        public string Name { get; set; }
         public string Photos { get; set; }
         public string Category { get; set; }
         [DataType(DataType.Date)]

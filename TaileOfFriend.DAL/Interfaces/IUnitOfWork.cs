@@ -18,7 +18,7 @@ namespace TaileOfFriend.DAL.Interfaces
         IProfileRepository ProfileRepository { get; }
         IImageRepository Images { get; }
         ICategoryRepository Categories { get; }
-        //IEventRepository Events { get; }
+        IEventRepository Events { get; }
         ILocationRepository Locations { get; }
         
 
