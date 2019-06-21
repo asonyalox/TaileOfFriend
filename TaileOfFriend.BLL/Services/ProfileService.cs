@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TaileOfFriend.BLL.DTO;
+using TaileOfFriend.BLL.Infrasrtucture;
 using TaileOfFriend.BLL.Interfaces;
 using TaileOfFriend.DAL.Enteties;
 using TaileOfFriend.DAL.Interfaces;
@@ -59,6 +61,48 @@ namespace TaileOfFriend.BLL.Services
                 Gender=p.Gender
             };
         }
+
+        public async Task<OperationDetails> ChangeImage(string userId, Image newImage)
+        {
+            var profile = Database.ProfileRepository.GetProfileWithFields(userId);
+            if (profile == null)
+            {
+                return new OperationDetails(false, "", "");
+            }
+
+            
+            int oldImageId = profile.Image.Id;
+
+            profile.Image = newImage;
+            Database.ProfileRepository.Update(profile);
+
+            var oldImage = Database.Images.GetById(oldImageId);
+            if (oldImage != null)
+            {
+                Database.Images.Delete(oldImage);
+            }
+            
+            await Database.SaveAsync();
+            return new OperationDetails(true, "", "");
+            
+        }
+
+        public async Task<OperationDetails> ChangeLocation(string userId, Location newLocation)
+        {
+            var profile = Database.ProfileRepository.GetProfileWithFields(userId);
+            if (profile == null)
+            {
+                return new OperationDetails(false,"","");
+            }
+
+            profile.Location = newLocation;
+            Database.ProfileRepository.Update(profile);
+
+            await Database.SaveAsync();
+            return new OperationDetails(true, "", "");
+        }
+
+        
 
         public void Dispose()
         {

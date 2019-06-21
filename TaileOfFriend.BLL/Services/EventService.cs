@@ -44,14 +44,18 @@ namespace TaileOfFriend.BLL.Services
                 return new OperationDetails(false, "Некоректне ID 0", "");
             }
 
-            Category oldEvent = Database.Categories.GetById(_event.Id);
+            Event oldEvent = Database.Events.GetEventWithAllFileds(_event.Id);
             if (oldEvent == null)
             {
                 return new OperationDetails(false, "Не знайдено", "");
             }
 
             oldEvent.Name = _event.Name;
+            oldEvent.EventImage = _event.EventImage;
+            oldEvent.Description = _event.Description;
+            oldEvent.Location = _event.Location;
 
+            Database.Events.Update(oldEvent);
             await Database.SaveAsync();
 
             return new OperationDetails(true, "", "");
@@ -71,7 +75,7 @@ namespace TaileOfFriend.BLL.Services
 
             Database.Events.Delete(_event);
             await Database.SaveAsync();
-            return new OperationDetails(true, "Не знайдено ", "");
+            return new OperationDetails(true, "Подію видалено ", "");
         }
     }
 }

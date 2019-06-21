@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Text;
 using TaileOfFriend.DAL.Enteties;
 using TaileOfFriend.DAL.Interfaces;
+
 
 namespace TaileOfFriend.DAL.Repositories
 {
@@ -12,5 +14,7 @@ namespace TaileOfFriend.DAL.Repositories
         {
 
         }
+
+        
     }
 }

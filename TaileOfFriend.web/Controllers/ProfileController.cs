@@ -14,40 +14,27 @@ namespace TaileOfFriend.web.Controllers
 {
     public class ProfileController:Controller
     {
-        private IProfileService _profileService;
-        private IUserService _userService;
-        private IFileService _fileService;
+        private IProfileService profileService;
+        private IUserService userService;
+        private IFileService fileService;
+        private IEventService eventService;
+        private ICategoryService categoryService;
         
 
         public ProfileController(
-            IProfileService profileSrv,
-            IUserService userSrv,
-            IFileService fileSrv
+            IProfileService _profileService,
+            IUserService _userService,
+            IFileService _fileService,
+            ICategoryService _categoryService
             )
         {
-            _profileService = profileSrv;
-            _userService = userSrv;
-            _fileService = fileSrv;
+            profileService = _profileService;
+            userService = _userService;
+            fileService = _fileService;
+            categoryService = _categoryService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            User currentUser = await _userService.GetCurrentUserAsync(HttpContext);
-
-            var profile = _profileService.GetProfile(currentUser);
-
-            var viewModel = new ProfileViewModel
-            {
-                ImageUrl = profile.ImageUrl,
-                UserName = profile.UserName,
-                Email = profile.Email,
-                Age = DateTime.Today.Year - profile.Birthday.Year,
-                Location =profile.Location,
-                
-            };
-
-            return View(viewModel);
-        }
+        
 
         
     }

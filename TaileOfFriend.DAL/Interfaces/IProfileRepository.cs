@@ -8,5 +8,6 @@ namespace TaileOfFriend.DAL.Interfaces
     public interface IProfileRepository:IRepository<Profile>
     {
         Profile GetById(string id);
+        Profile GetProfileWithFields(string id);
     }
 }

@@ -7,5 +7,6 @@ namespace TaileOfFriend.DAL.Interfaces
 {
     public interface IEventRepository:IRepository<Event>
     {
+        Event GetEventWithAllFileds(int id);
     }
 }

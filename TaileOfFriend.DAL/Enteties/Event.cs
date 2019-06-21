@@ -8,11 +8,11 @@ namespace TaileOfFriend.DAL.Enteties
    public class Event:BaseEntity
     {
         public string Name { get; set; }
-        public string Photos { get; set; }
+        public Image EventImage { get; set; }
         public string Category { get; set; }
         [DataType(DataType.Date)]
         public DateTime EventDates { get; set; }
-        public string Owner { get; set; }
+        public Profile Owner { get; set; }
         public string Description { get; set; }
 
         public List<EventCategory> EventCategories { get; set; }
