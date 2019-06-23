@@ -13,7 +13,7 @@ namespace TaileOfFriend.BLL.Interfaces
         IEnumerable<Category> GetAllCategories();
         Category GetById(int id);
 
-        OperationDetails AddCategory(string title)
+        OperationDetails AddCategory(string title);
         Task<OperationDetails> EditAsync(Category category);
         Task<OperationDetails> DeleteAsync(int id);
     }

@@ -23,6 +23,9 @@ namespace TaileOfFriend.web.Controllers
             categoryService = _categoryService;
         }
 
-        
+        public IActionResult Index() => View();
+
+        public IActionResult ListEvent() => PartialView("ListEvent");
+
     }
 }
