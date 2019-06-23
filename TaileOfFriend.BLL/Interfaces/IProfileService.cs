@@ -15,5 +15,9 @@ namespace TaileOfFriend.BLL.Interfaces
 
         Task<OperationDetails> ChangeImage(string userId, Image newImage);
         Task<OperationDetails> ChangeLocation(string userId, Location newLocation);
+        Task<User> FindById(string id);
+        Task<OperationDetails> ChangeProfileInfo(ProfileDTO profile);
+
+
     }
 }

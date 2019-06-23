@@ -36,7 +36,7 @@ namespace TaileOfFriend.BLL.Services
                     Email = p.User.Email,
                     PhoneNumber = p.User.PhoneNumber,
                     Birthday = p.Birthday,
-                    Location = p.Location.Loc,
+                    Location = p.Location,
                     ImageUrl = p.Image?.Url,
                     
                 });
@@ -56,10 +56,18 @@ namespace TaileOfFriend.BLL.Services
                 Email = u.Email,
                 PhoneNumber = u.PhoneNumber,
                 Birthday = p.Birthday,
-                Location=p.Location?.Loc,
+                Location=p.Location,
                 ImageUrl = p.Image?.Url,
                 Gender=p.Gender
             };
+        }
+
+        public async Task<User> FindById(string id)
+        {
+            var profile = Database.ProfileRepository.GetProfileWithFields(id);
+
+            User user = await Database.UserManager.FindByIdAsync(profile.UserId);
+            return user;
         }
 
         public async Task<OperationDetails> ChangeImage(string userId, Image newImage)
@@ -85,6 +93,29 @@ namespace TaileOfFriend.BLL.Services
             await Database.SaveAsync();
             return new OperationDetails(true, "", "");
             
+        }
+
+        public async Task<OperationDetails> ChangeProfileInfo(ProfileDTO profile)
+        {
+            if (profile.Id == null)
+            {
+                return new OperationDetails(false, "Id field is '0'", "");
+            }
+
+            Profile oldProfile = Database.ProfileRepository.GetProfileWithFields(profile.Id);
+            if (oldProfile == null)
+            {
+                return new OperationDetails(false, "Not found", "");
+            }
+
+            oldProfile.Location = profile.Location;
+            oldProfile.Birthday = profile.Birthday;
+
+            Database.ProfileRepository.Update(oldProfile);
+
+            await Database.SaveAsync();
+
+            return new OperationDetails(true, "", "");
         }
 
         public async Task<OperationDetails> ChangeLocation(string userId, Location newLocation)

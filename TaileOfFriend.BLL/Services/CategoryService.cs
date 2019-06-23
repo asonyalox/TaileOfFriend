@@ -25,18 +25,11 @@ namespace TaileOfFriend.BLL.Services
 
         public Category GetById(int id) => Database.Categories.GetById(id);
 
-        public async Task<OperationDetails> CreateAsync(Category category)
+        public OperationDetails AddCategory(string title)
         {
-            if (Database.Categories.All().Any(c => c.Name == category.Name))
-            {
-                return new OperationDetails(false, "Дана категорія вже існує", "");
-            }
-
-            Database.Categories.Insert(category);
-
-            await Database.SaveAsync();
-
-            return new OperationDetails(true, "", "");
+            Database.Categories.Insert(new Category() { Name = title });
+            Database.SaveAsync();
+            return new OperationDetails(true, "Ok", "");
         }
 
         public async Task<OperationDetails> EditAsync(Category category)
