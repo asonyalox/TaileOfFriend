@@ -1,0 +1,74 @@
+﻿@using TaileOfFriend.DAL.Enteties
+@model TaileOfFriend.web.ViewModel.EditProfileViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div id="main">
+
+
+        <div class="row" id="real-estates-detail">
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <header class="panel-title">
+                            <div class="text-center">
+                                <strong>Користувач сайта</strong>
+                            </div>
+                        </header>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-12">
+                <div class="panel">
+                    <div class="panel-body">
+                        <ul id="myTab" class="nav nav-pills">
+                            <li class="active"><a  asp-controller="Profile" asp-action="Index" data-toggle="tab">Про користувача</a></li>
+                            <li class=""><a asp-controller="Profile" asp-action="Edit" data-toggle="tab">Редагувати профіль</a></li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class=""><a href="#contact" data-toggle="tab">Створити подію</a></li>
+                            }
+                        </ul>
+                        <form method="post" asp-controller="Profile" asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div id="myTabContent" class="tab-content">
+                                <hr>
+                                <div class="tab-pane fade active in" id="detail">
+                                    <h4>Редагування профіля</h4>
+                                    <input hidden asp-for="UserId" />
+                                    <table class="table table-th-block">
+                                        <tbody>
+                                            <tr>
+                                                <td class="active">Нік:</td>
+                                                <td><input asp-for="UserName" class="form-control" />  <span asp-validation-for="UserName" class="text-danger"></span>       </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="active">Локація:</td>
+                                                <td><input asp-for="Location.Loc" class="form-control" />   <span asp-validation-for="Location" class="text-danger"></span>      </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="active">Рік народження:</td>
+                                                <td><input asp-for="Birthday" class="form-control" />   <span asp-validation-for="Birthday" class="text-danger"></span>      </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /.main -->
+</div><!-- /.container --

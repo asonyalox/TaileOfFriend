@@ -10,7 +10,7 @@ using TaileOfFriend.web.ViewModel;
 
 namespace TaileOfFriend.web.mapper
 {
-    public class MappingProfile:Profile
+    public class MappingProfile : Profile
 
     {
          public MappingProfile()
@@ -21,9 +21,16 @@ namespace TaileOfFriend.web.mapper
                .ForMember(dest => dest.Age, opts => opts.MapFrom(src => (DateTime.Today.Year - src.Birthday.Year)));
 
             CreateMap<EditProfileViewModel, ProfileDTO>()
-                .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Birthday, opts => opts.MapFrom(src => src.Birthday))
                 .ForMember(dest => dest.Location, opts => opts.MapFrom(src => src.Location));
+
+
+            CreateMap<TaileOfFriend.DAL.Enteties.Profile, ProfileDTO>()
+                .ForMember(dest => dest.Birthday, opts => opts.MapFrom(src => src.Birthday))
+                .ForMember(dest => dest.UserName, opts => opts.MapFrom(src => src.User.UserName))
+                .ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.User.Email));
+                
         }
 
         

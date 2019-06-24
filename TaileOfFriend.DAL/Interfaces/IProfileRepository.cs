@@ -10,6 +10,7 @@ namespace TaileOfFriend.DAL.Interfaces
     {
         Profile GetById(string id);
         Profile GetProfileWithFields(string id);
-        
+        IEnumerable<Profile> AllProfilesWithAllFields();
+
     }
 }

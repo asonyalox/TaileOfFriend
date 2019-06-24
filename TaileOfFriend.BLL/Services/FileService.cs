@@ -44,6 +44,18 @@ namespace TaileOfFriend.BLL.Services
             return image;
         }
 
-        
+        public async Task Delete(int id)
+        {
+            var photo = Database.Images.GetById(id);
+            if (photo != null)
+            {
+                File.Delete(fileHost + photo.Url);
+                Database.Images.Delete(photo);
+                await Database.SaveAsync();
+            }
+
+        }
+
+
     }
 }

@@ -10,13 +10,17 @@ namespace TaileOfFriend.BLL.Interfaces
 {
     public interface IProfileService:IDisposable
     {
-        List<ProfileDTO> Users();
+        IEnumerable<ProfileDTO> Users();
         ProfileDTO GetProfile(User u);
 
         Task<OperationDetails> ChangeImage(string userId, Image newImage);
         Task<OperationDetails> ChangeLocation(string userId, Location newLocation);
         Task<User> FindById(string id);
         Task<OperationDetails> ChangeProfileInfo(ProfileDTO profile);
+        ProfileDTO GetById(string id);
+        
+       
+
 
 
     }

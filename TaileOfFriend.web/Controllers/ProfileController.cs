@@ -58,19 +58,52 @@ namespace TaileOfFriend.web.Controllers
             return RedirectToAction("Index", "Profile");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ChangeImage(ChangeImageViewModel model)
+        {
+            User currentUser = await userService.GetCurrentUserAsync(HttpContext);
+
+            if (ModelState.IsValid && (model.UserId == currentUser.Id || User.IsInRole("Admin")))
+            {
+                var newImage = await fileService.AddImage(model.Image);
+                var result = await profileService.ChangeImage(model.UserId, newImage);
+                if (result.Succedeed)
+                {
+                    await fileService.Delete(Int32.Parse(result.Message));
+                    return Ok(newImage.Url);
+                }
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet]
+        public IActionResult GetById()
+        {
+            return View(profileService.Users());
+        }
+
+        [HttpGet]
+        public IActionResult GetById(string id)
+        {
+            var profile = profileService.GetById(id);
+            if (profile != null)
+            {
+                var viewModel = mapper.Map<ProfileDTO, ProfileViewModel>(profile);
+                return Ok(viewModel);
+            }
+            return BadRequest();
+        }
+
         public async Task<IActionResult> Edit(string id)
         {
-            User user = await profileService.FindById(id);
-            if (user == null)
-                return NotFound();
-            EditProfileViewModel model = new EditProfileViewModel
-            {
-                Id = user.Id,
-                Location=user.Profile.Location.Loc,
-                UserName = user.UserName,
-                Birthday = user.Profile.Birthday
-            };
+            User currentUser = await userService.GetCurrentUserAsync(HttpContext);
+            EditProfileViewModel model = new EditProfileViewModel { UserId = currentUser.Id };
+
             return View(model);
+
+
+
         }
 
         [HttpPost]
@@ -78,7 +111,7 @@ namespace TaileOfFriend.web.Controllers
         {
             User currentUser = await userService.GetCurrentUserAsync(HttpContext);
 
-            if (ModelState.IsValid && (model.Id == currentUser.Profile.UserId || User.IsInRole("Admin")))
+            if (ModelState.IsValid && (model.UserId == currentUser.Id || User.IsInRole("Admin")))
             {
                 ProfileDTO profile = mapper.Map<EditProfileViewModel, ProfileDTO>(model);
 
@@ -86,11 +119,12 @@ namespace TaileOfFriend.web.Controllers
 
                 if (result.Succedeed)
                 {
-                    return Ok();
+                    return View(model);
                 }
             }
-            return BadRequest();
-
+            return View(model);
         }
+
+
     }
 }

@@ -18,6 +18,7 @@ namespace TaileOfFriend.DAL.Enteties
         public DateTime Birthday { get; set; }
         public Location Location { get; set; }
         public Image Image { get; set; }
+        public string UserName { get; set; }
 
         public virtual List<ProfileCategory> ProfileCategories { get; set; }
         public Gender Gender { get; set; }

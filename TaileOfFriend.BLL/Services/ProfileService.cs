@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,51 +16,34 @@ namespace TaileOfFriend.BLL.Services
    public class ProfileService:IProfileService
     {
         public IUnitOfWork Database { get; set; }
-        public ProfileService(IUnitOfWork uow)
+        private IMapper mapper { get; set; }
+
+        public ProfileService(IUnitOfWork uow, IMapper _mapper)
         {
             Database = uow;
+            mapper = _mapper;
         }
 
-        public List<ProfileDTO> Users()
+        public IEnumerable<ProfileDTO> Users()
         {
-            var profiles = Database.ProfileRepository.All()
-                .Include(p => p.User)
-                .Include(p => p.Location)
-                .ToList();
-            var response = new List<ProfileDTO>();
+            var profiles = Database.ProfileRepository.AllProfilesWithAllFields();
+            var responce = mapper.Map<IEnumerable<TaileOfFriend.DAL.Enteties.Profile>, IEnumerable<ProfileDTO>>(profiles);
 
-            foreach(var p in profiles)
-            {
-                response.Add(new ProfileDTO
-                {
-                    UserName = p.User.UserName,
-                    Email = p.User.Email,
-                    PhoneNumber = p.User.PhoneNumber,
-                    Birthday = p.Birthday,
-                    Location = p.Location,
-                    ImageUrl = p.Image?.Url,
-                    
-                });
-            }
+            return responce;
+        }
 
-            return response;
+        public ProfileDTO GetById(string id)
+        {
+            var profile = Database.ProfileRepository.GetProfileWithFields(id);
+
+            return mapper.Map<TaileOfFriend.DAL.Enteties.Profile, ProfileDTO>(profile);
         }
 
         public ProfileDTO GetProfile(User u)
         {
+            var profile = Database.ProfileRepository.GetProfileWithFields(u.Id);
 
-            var p = Database.ProfileRepository.GetById(u.Id);
-
-            return new ProfileDTO
-            {
-                UserName = u.UserName,
-                Email = u.Email,
-                PhoneNumber = u.PhoneNumber,
-                Birthday = p.Birthday,
-                Location=p.Location,
-                ImageUrl = p.Image?.Url,
-                Gender=p.Gender
-            };
+            return mapper.Map<TaileOfFriend.DAL.Enteties.Profile, ProfileDTO>(profile);
         }
 
         public async Task<User> FindById(string id)
@@ -95,6 +79,8 @@ namespace TaileOfFriend.BLL.Services
             
         }
 
+        
+
         public async Task<OperationDetails> ChangeProfileInfo(ProfileDTO profile)
         {
             if (profile.Id == null)
@@ -102,7 +88,7 @@ namespace TaileOfFriend.BLL.Services
                 return new OperationDetails(false, "Id field is '0'", "");
             }
 
-            Profile oldProfile = Database.ProfileRepository.GetProfileWithFields(profile.Id);
+            TaileOfFriend.DAL.Enteties.Profile oldProfile = Database.ProfileRepository.GetProfileWithFields(profile.Id);
             if (oldProfile == null)
             {
                 return new OperationDetails(false, "Not found", "");

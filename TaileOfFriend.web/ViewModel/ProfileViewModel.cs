@@ -11,8 +11,9 @@ namespace TaileOfFriend.web.ViewModel
         public string UserName { get; set; }
         public string Email { get; set; }
 
-        public string ImageUrl { get; set; }
+        public Gender Gender { get; set; }
+        public string Image { get; set; }
         public int Age { get; set; }
-        public string Location { get; set; }
+        public Location Location { get; set; }
     }
 }

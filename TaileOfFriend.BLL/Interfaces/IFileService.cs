@@ -10,5 +10,6 @@ namespace TaileOfFriend.BLL.Interfaces
     public interface IFileService
     {
         Task<Image> AddImage(IFormFile uploadedFile);
+        Task Delete(int id);
     }
 }

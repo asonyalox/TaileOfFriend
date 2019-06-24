@@ -10,9 +10,9 @@ namespace TaileOfFriend.DAL.Enteties
 {
     public enum Gender
     {
-        Male,
-        Female,
-        Other,
+        Чоловіча,
+        Жіноча,
+        Інша,
     }
    public class User: IdentityUser
     {

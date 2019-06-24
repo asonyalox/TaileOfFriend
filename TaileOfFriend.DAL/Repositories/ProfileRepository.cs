@@ -22,11 +22,19 @@ namespace TaileOfFriend.DAL.Repositories
 
         public Profile GetProfileWithFields(string id)
         {
-            return Entities.Where(p => p.UserId == id)
+            return dbset.Where(p => p.UserId == id)
                 .Include(p => p.User)
                 .Include(p=>p.Image)
                 .Include(p=>p.Location)
                 .FirstOrDefault();
+        }
+
+        public IEnumerable<Profile> AllProfilesWithAllFields()
+        {
+            return dbset
+                .Include(p => p.User)
+                .Include(p => p.Location);
+                    
         }
     }
 }

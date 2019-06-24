@@ -16,6 +16,10 @@ using TaileOfFriend.DAL.Interfaces;
 using TaileOfFriend.BLL.Interfaces;
 using TaileOfFriend.BLL.Services;
 using TaileOfFriend.DAL.Repositories;
+using TaileOfFriend.web.mapper;
+using System.Reflection;
+using AutoMapper;
+
 
 namespace TaileOfFriend.web
 {
@@ -68,6 +72,8 @@ namespace TaileOfFriend.web
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddAutoMapper(typeof(MappingProfile).GetTypeInfo().Assembly);
+
             services.AddHttpContextAccessor();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -76,6 +82,10 @@ namespace TaileOfFriend.web
             services.AddTransient<IProfileService, ProfileService>();
 
             services.AddTransient<IFileService, FileService>();
+
+            services.AddTransient<ICategoryService, CategoryService >();
+            services.AddTransient<IEventService, EventService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
