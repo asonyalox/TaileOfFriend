@@ -102,6 +102,11 @@ namespace TaileOfFriend.BLL.Services
             }
         }
 
+        public async Task<IdentityResult> Delete(UserDTO userDto)
+        {
+            return await Database.UserManager.DeleteAsync(await Database.UserManager.FindByIdAsync(userDto.Id));
+        }
+
         public void Dispose()
         {
             Database.Dispose();

@@ -13,7 +13,7 @@ using TaileOfFriend.DAL.Interfaces;
 
 namespace TaileOfFriend.BLL.Services
 {
-   public class ProfileService:IProfileService
+    public class ProfileService : IProfileService
     {
         public IUnitOfWork Database { get; set; }
         private IMapper mapper { get; set; }
@@ -62,7 +62,7 @@ namespace TaileOfFriend.BLL.Services
                 return new OperationDetails(false, "", "");
             }
 
-            
+
             int oldImageId = profile.Image.Id;
 
             profile.Image = newImage;
@@ -73,13 +73,13 @@ namespace TaileOfFriend.BLL.Services
             {
                 Database.Images.Delete(oldImage);
             }
-            
+
             await Database.SaveAsync();
             return new OperationDetails(true, "", "");
-            
+
         }
 
-        
+
 
         public async Task<OperationDetails> ChangeProfileInfo(ProfileDTO profile)
         {
@@ -94,7 +94,19 @@ namespace TaileOfFriend.BLL.Services
                 return new OperationDetails(false, "Not found", "");
             }
 
-            oldProfile.Location = profile.Location;
+            if (oldProfile.Location != null || oldProfile.Location == null)
+            {
+                if (Database.Locations.FindClone(profile.Location) == null)
+                {
+                    Database.Locations.Insert(new Location { Loc = profile.Location.Loc });
+                    
+                }
+
+
+                oldProfile.Location = Database.Locations.FindClone(profile.Location);
+
+            }
+            oldProfile.UserName = profile.UserName;
             oldProfile.Birthday = profile.Birthday;
 
             Database.ProfileRepository.Update(oldProfile);
@@ -104,21 +116,8 @@ namespace TaileOfFriend.BLL.Services
             return new OperationDetails(true, "", "");
         }
 
-        public async Task<OperationDetails> ChangeLocation(string userId, Location newLocation)
-        {
-            var profile = Database.ProfileRepository.GetProfileWithFields(userId);
-            if (profile == null)
-            {
-                return new OperationDetails(false,"","");
-            }
-
-            profile.Location = newLocation;
-            Database.ProfileRepository.Update(profile);
-
-            await Database.SaveAsync();
-            return new OperationDetails(true, "", "");
-        }
-
+       
+        
         
 
         public void Dispose()

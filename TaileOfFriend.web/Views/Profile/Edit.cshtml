@@ -26,8 +26,8 @@
                 <div class="panel">
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
-                            <li class="active"><a  asp-controller="Profile" asp-action="Index" data-toggle="tab">Про користувача</a></li>
-                            <li class=""><a asp-controller="Profile" asp-action="Edit" data-toggle="tab">Редагувати профіль</a></li>
+                            <li class=""><a  asp-controller="Profile" asp-action="Index" data-toggle="tab">Про користувача</a></li>
+                            <li class="active"><a asp-controller="Profile" asp-action="Edit" data-toggle="tab">Редагувати профіль</a></li>
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li class=""><a href="#contact" data-toggle="tab">Створити подію</a></li>

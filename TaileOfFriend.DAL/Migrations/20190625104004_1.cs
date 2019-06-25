@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TaileOfFriend.DAL.Migrations
 {
-    public partial class _2 : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -318,12 +318,12 @@ namespace TaileOfFriend.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "04bf0bc6-2c9d-4c9c-b769-2dd144fffc15", "564c3550-659c-4af2-b354-b1b2a0230411", "Admin", "ADMIN" });
+                values: new object[] { "8622abcd-0e6e-45de-b2c5-4988d91a2b41", "a41fa750-5a51-4e52-a9c7-30e681c3b9cb", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1801974f-6dce-4b49-bada-5e19d7a53667", "41ae46f6-3df9-492d-93d8-b7e6fdd4baf9", "User", "USER" });
+                values: new object[] { "5fa20698-18b4-4524-bbc4-10a122c16394", "315660ff-2ccf-4f70-91bb-53014b7b9973", "User", "USER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

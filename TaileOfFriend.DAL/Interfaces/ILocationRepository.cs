@@ -7,5 +7,6 @@ namespace TaileOfFriend.DAL.Interfaces
 {
     public interface ILocationRepository:IRepository<Location>
     {
+        Location FindClone(Location clone);
     }
 }

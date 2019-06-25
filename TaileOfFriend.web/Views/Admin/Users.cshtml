@@ -1,0 +1,67 @@
+﻿@using TaileOfFriend.BLL.DTO
+@model IEnumerable<ProfileDTO>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Users";
+}
+
+<div class="container">
+    <div id="main">
+
+
+        <div class="row" id="real-estates-detail">
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <header class="panel-title">
+                            <div class="text-center">
+                                <strong>Редагування профілів</strong>
+                            </div>
+                        </header>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-xs-12">
+                <div class="panel">
+                    <div class="panel-body">
+                        <ul id="myTab" class="nav nav-pills">
+                            <li class=""><a href="#detail" data-toggle="tab">Адмінка</a></li>
+                            <li class="active"><a asp-controller="Admin" asp-action="Users" data-toggle="tab">Редагування профілів</a></li>
+
+                            <li class=""><a href="#contact" data-toggle="tab">Створити подію</a></li>
+
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <hr>
+                            <div class="tab-pane fade active in" id="detail">
+                                <h4>Інформація профіля</h4>
+                                <table class="table table-th-block">
+                                    <tr><th>Username</th><th>Email</th><th></th></tr>
+                                    @foreach (var user in Model)
+                                    {
+                                        <tr>
+                                            <td>@user.UserName</td>
+                                            <td>@user.Email</td>
+                                            <td>
+                                                <form asp-controller="Profile" asp-action="Delete" asp-route-id="@user.Id" method="post">
+                                                    <a class="btn btn-sm btn-primary" asp-controller="Profile" asp-action="Edit" asp-route-id="@user.Id">Изменить</a>
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        Удалить
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /.main -->
+</div><!-- /.co

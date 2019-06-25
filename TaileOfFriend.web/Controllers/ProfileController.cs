@@ -90,12 +90,12 @@ namespace TaileOfFriend.web.Controllers
             if (profile != null)
             {
                 var viewModel = mapper.Map<ProfileDTO, ProfileViewModel>(profile);
-                return Ok(viewModel);
+                return View(viewModel);
             }
             return BadRequest();
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit()
         {
             User currentUser = await userService.GetCurrentUserAsync(HttpContext);
             EditProfileViewModel model = new EditProfileViewModel { UserId = currentUser.Id };
@@ -125,6 +125,15 @@ namespace TaileOfFriend.web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Delete(string id)
+        {
+
+            OperationDetails result = await userService.Delete(id);
+            if (result.Succedeed)
+                return RedirectToAction("Index", "Home");
+            return View();
+        }
 
     }
 }

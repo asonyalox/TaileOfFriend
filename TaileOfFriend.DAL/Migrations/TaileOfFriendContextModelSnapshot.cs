@@ -43,8 +43,8 @@ namespace TaileOfFriend.DAL.Migrations
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = "04bf0bc6-2c9d-4c9c-b769-2dd144fffc15", ConcurrencyStamp = "564c3550-659c-4af2-b354-b1b2a0230411", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "1801974f-6dce-4b49-bada-5e19d7a53667", ConcurrencyStamp = "41ae46f6-3df9-492d-93d8-b7e6fdd4baf9", Name = "User", NormalizedName = "USER" }
+                        new { Id = "8622abcd-0e6e-45de-b2c5-4988d91a2b41", ConcurrencyStamp = "a41fa750-5a51-4e52-a9c7-30e681c3b9cb", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "5fa20698-18b4-4524-bbc4-10a122c16394", ConcurrencyStamp = "315660ff-2ccf-4f70-91bb-53014b7b9973", Name = "User", NormalizedName = "USER" }
                     );
                 });
 

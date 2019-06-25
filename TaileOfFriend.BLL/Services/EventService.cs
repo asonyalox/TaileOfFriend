@@ -25,7 +25,7 @@ namespace TaileOfFriend.BLL.Services
 
         public async Task<OperationDetails> CreateAsync(Event _event)
         {
-            if (Database.Events.All().Any(c => c.Name == _event.Name))
+            if (Database.Events.All().Any(c => c.EventName == _event.EventName))
             {
                 return new OperationDetails(false, "Подія з такою назвою вже існує", "");
             }
@@ -50,8 +50,8 @@ namespace TaileOfFriend.BLL.Services
                 return new OperationDetails(false, "Не знайдено", "");
             }
 
-            oldEvent.Name = _event.Name;
-            oldEvent.EventImage = _event.EventImage;
+            oldEvent.EventName = _event.EventName;
+            
             oldEvent.Description = _event.Description;
             oldEvent.Location = _event.Location;
 

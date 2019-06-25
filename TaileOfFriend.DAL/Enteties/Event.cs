@@ -7,17 +7,19 @@ namespace TaileOfFriend.DAL.Enteties
 {
    public class Event:BaseEntity
     {
-        public string Name { get; set; }
-        public Image EventImage { get; set; }
+        public string EventName { get; set; }
+        
         public string Category { get; set; }
         [DataType(DataType.Date)]
         public DateTime EventDates { get; set; }
-        public Profile Owner { get; set; }
+        public string OwnerId { get; set; }
         public string Description { get; set; }
-
-        public List<EventCategory> EventCategories { get; set; }
-
         
-        public Location Location { get; set; }
+        public  List<EventCategory> EventCategories { get; set; }
+
+        public virtual Location Location { get; set; }
+
+        public virtual User Owner { get; set; }
+        
     }
 }

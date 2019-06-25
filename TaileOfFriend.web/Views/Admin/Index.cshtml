@@ -1,11 +1,9 @@
 ﻿@using TaileOfFriend.DAL.Enteties
 @model TaileOfFriend.web.ViewModel.ProfileViewModel
-
 @{
-    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Index";
 }
-
-
 
 <div class="container">
     <div id="main">
@@ -17,20 +15,16 @@
                     <div class="panel-heading">
                         <header class="panel-title">
                             <div class="text-center">
-                                <strong>Користувач сайта</strong>
+                                <strong>Адмін Сайта</strong>
                             </div>
                         </header>
                     </div>
                     <div class="panel-body">
                         <div class="text-center" id="author">
-                            @if (Model.Image == null)
-                            {
-                                <img width="200px" height="200px" src="~/images/defaultPhoto.png" />
-                            }
+                            
+                            
                             <h3>@Html.DisplayFor(model => model.UserName)</h3>
-                            <form asp-controller="ProfileController" asp-action="ChangeImage">
-                            <a  href="#addphoto" data-toggle="tab">Редагувати</a>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -39,12 +33,11 @@
                 <div class="panel">
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
-                            <li class="active"><a href="#detail" data-toggle="tab">Про користувача</a></li>
-                            <li class=""><a asp-controller="Profile" asp-action="Edit"  data-toggle="tab">Редагувати профіль</a></li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                            <li class=""><a href="#contact" data-toggle="tab">Створити подію</a></li>
-                            }
+                            <li class="active"><a href="#detail" data-toggle="tab">Адмінка</a></li>
+                            <li class=""><a asp-controller="Admin" asp-action="Users" data-toggle="tab">Редагувати профілі</a></li>
+                           
+                             <li class=""><a href="#contact" data-toggle="tab">Створити подію</a></li>
+                            
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <hr>
@@ -52,14 +45,14 @@
                                 <h4>Інформація профіля</h4>
                                 <table class="table table-th-block">
                                     <tbody>
-                                        <tr><td class="active">Локація:</td><td>@Html.DisplayFor(model => model.Location.Loc)</td></tr>
-                                        <tr><td class="active">Стать:</td><td>@Html.DisplayFor(model => model.Gender)</td></tr>
-                                        <tr><td class="active">Вік:</td><td>@Html.DisplayFor(model => model.Age)</td></tr>
-                                       
+                                        <tr><td class="active">Видаляти:</td><td>Інформацію що суперечить правилам</td></tr>
+                                        <tr><td class="active">Щмінювати:</td><td>Інформацію що суперечить істині</td></tr>
+                                        <tr><td class="active">Створювати:</td><td>Категорії</td></tr>
+
                                     </tbody>
                                 </table>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -68,4 +61,4 @@
     </div>
 
 </div><!-- /.main -->
-</div><!-- /.container --
+</div><!-- /.containe

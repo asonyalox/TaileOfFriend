@@ -34,6 +34,10 @@
                     {
                         <li><a asp-controller="Profile" asp-action="Index">My profile</a></li>
                         <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-controller="Admin" asp-action="Index">Admin</a></li>
+                        }
                     }
                     else
                     {

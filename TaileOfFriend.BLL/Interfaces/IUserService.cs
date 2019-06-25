@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -19,6 +20,7 @@ namespace TaileOfFriend.BLL.Interfaces
         Task<User> GetCurrentUserAsync(HttpContext context);
 
         Task AdminSeedAsync(UserDTO adminDto);
+        Task<IdentityResult> Delete(UserDTO userDto);
 
     }
 }

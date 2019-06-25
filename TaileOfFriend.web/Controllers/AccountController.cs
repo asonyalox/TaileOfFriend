@@ -38,10 +38,11 @@ namespace TaileOfFriend.web.Controllers
                     
                 };
                 bool auth = await _userService.AuthenticateAsync(userDto);
-                if (auth)
+                if (auth )
                 {
                     return RedirectToAction("Index", "Profile");
                 }
+               
             }
             ModelState.AddModelError("", "Емейл чи пароль невірний");
             return View(model);

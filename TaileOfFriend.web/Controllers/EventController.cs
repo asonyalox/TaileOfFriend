@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaileOfFriend.BLL.DTO;
 using TaileOfFriend.BLL.Interfaces;
 
 namespace TaileOfFriend.web.Controllers
@@ -26,6 +27,8 @@ namespace TaileOfFriend.web.Controllers
         public IActionResult Index() => View();
 
         public IActionResult ListEvent() => PartialView("ListEvent");
+
+        
 
     }
 }

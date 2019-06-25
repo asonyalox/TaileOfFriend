@@ -17,11 +17,10 @@ namespace TaileOfFriend.DAL.Repositories
 
         public Event GetEventWithAllFileds(int id)
         {
-            return Entities.Where(l => l.Id == id)
+            return dbset.Where(l => l.Id == id)
                 .Include(l => l.Category)
                 .Include(l=>l.Location)
                 .Include(l=>l.Owner)
-                .Include(l=>l.EventImage)
                 .FirstOrDefault();
         }
     }
