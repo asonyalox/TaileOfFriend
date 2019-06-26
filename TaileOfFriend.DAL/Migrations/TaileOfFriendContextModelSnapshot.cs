@@ -43,8 +43,8 @@ namespace TaileOfFriend.DAL.Migrations
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = "8622abcd-0e6e-45de-b2c5-4988d91a2b41", ConcurrencyStamp = "a41fa750-5a51-4e52-a9c7-30e681c3b9cb", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = "5fa20698-18b4-4524-bbc4-10a122c16394", ConcurrencyStamp = "315660ff-2ccf-4f70-91bb-53014b7b9973", Name = "User", NormalizedName = "USER" }
+                        new { Id = "04b1b194-89b0-4207-b855-8aeb9ba331bb", ConcurrencyStamp = "94f89d9f-a417-41e7-9e65-530233eb3958", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = "a7e19f0e-ea34-4bcc-a32e-73db655c3385", ConcurrencyStamp = "79ecf85d-0c60-4f94-b094-ab00ca825e6e", Name = "User", NormalizedName = "USER" }
                     );
                 });
 
@@ -159,21 +159,17 @@ namespace TaileOfFriend.DAL.Migrations
 
                     b.Property<DateTime>("EventDates");
 
-                    b.Property<int?>("EventImageId");
+                    b.Property<string>("EventName");
 
                     b.Property<int?>("LocationId");
 
-                    b.Property<string>("Name");
-
-                    b.Property<string>("OwnerUserId");
+                    b.Property<string>("OwnerId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventImageId");
-
                     b.HasIndex("LocationId");
 
-                    b.HasIndex("OwnerUserId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Events");
                 });
@@ -359,17 +355,13 @@ namespace TaileOfFriend.DAL.Migrations
 
             modelBuilder.Entity("TaileOfFriend.DAL.Enteties.Event", b =>
                 {
-                    b.HasOne("TaileOfFriend.DAL.Enteties.Image", "EventImage")
-                        .WithMany()
-                        .HasForeignKey("EventImageId");
-
                     b.HasOne("TaileOfFriend.DAL.Enteties.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
 
-                    b.HasOne("TaileOfFriend.DAL.Enteties.Profile", "Owner")
+                    b.HasOne("TaileOfFriend.DAL.Enteties.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerUserId");
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("TaileOfFriend.DAL.Enteties.EventCategory", b =>

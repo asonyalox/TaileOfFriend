@@ -96,16 +96,25 @@ namespace TaileOfFriend.BLL.Services
 
         public async Task AdminSeedAsync(UserDTO adminDto)
         {
-            if (!Database.UserManager.Users.Any())
+            //if (!Database.UserManager.Users.Any())
+            var admin = await Database.UserManager.FindByEmailAsync(adminDto.Email);
+            if (admin == null) 
             {
                 await CreateAsync(adminDto);
             }
         }
 
-        public async Task<IdentityResult> Delete(UserDTO userDto)
+        public async Task Delete(string id)
         {
-            return await Database.UserManager.DeleteAsync(await Database.UserManager.FindByIdAsync(userDto.Id));
+            User user= await Database.UserManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                await Database.UserManager.DeleteAsync(user);
+            }
+            await Database.SaveAsync();
         }
+
+        
 
         public void Dispose()
         {

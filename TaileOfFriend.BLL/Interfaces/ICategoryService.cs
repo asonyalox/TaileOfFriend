@@ -16,5 +16,6 @@ namespace TaileOfFriend.BLL.Interfaces
         OperationDetails AddCategory(string title);
         Task<OperationDetails> EditAsync(Category category);
         Task<OperationDetails> DeleteAsync(int id);
+        List<Category> Categories();
     }
 }

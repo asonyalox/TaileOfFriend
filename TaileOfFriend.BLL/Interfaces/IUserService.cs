@@ -20,7 +20,8 @@ namespace TaileOfFriend.BLL.Interfaces
         Task<User> GetCurrentUserAsync(HttpContext context);
 
         Task AdminSeedAsync(UserDTO adminDto);
-        Task<IdentityResult> Delete(UserDTO userDto);
+        Task Delete(string id);
+        
 
     }
 }

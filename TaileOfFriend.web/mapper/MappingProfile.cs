@@ -29,6 +29,7 @@ namespace TaileOfFriend.web.mapper
             CreateMap<TaileOfFriend.DAL.Enteties.Profile, ProfileDTO>()
                 .ForMember(dest => dest.Birthday, opts => opts.MapFrom(src => src.Birthday))
                 .ForMember(dest => dest.UserName, opts => opts.MapFrom(src => src.User.UserName))
+                .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.User.Email));
                 
         }

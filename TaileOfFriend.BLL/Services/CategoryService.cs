@@ -23,6 +23,11 @@ namespace TaileOfFriend.BLL.Services
 
         public IEnumerable<Category> GetAllCategories() => Database.Categories.All();
 
+        public List<Category> Categories()
+        {
+            return Database.Categories.GetAll().ToList();
+        }
+
         public Category GetById(int id) => Database.Categories.GetById(id);
 
         public OperationDetails AddCategory(string title)
@@ -68,5 +73,10 @@ namespace TaileOfFriend.BLL.Services
             await Database.SaveAsync();
             return new OperationDetails(true, "Не знайдено ", "");
         }
+
+       
+
+
+
     }
 }

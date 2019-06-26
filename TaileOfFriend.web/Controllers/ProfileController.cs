@@ -126,13 +126,12 @@ namespace TaileOfFriend.web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
 
-            OperationDetails result = await userService.Delete(id);
-            if (result.Succedeed)
-                return RedirectToAction("Index", "Home");
-            return View();
+            await userService.Delete(id);
+            return RedirectToAction("Users", "Admin");
+
         }
 
     }

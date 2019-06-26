@@ -15,5 +15,6 @@ namespace TaileOfFriend.BLL.Interfaces
         Task<OperationDetails> CreateAsync(Event _event);
         Task<OperationDetails> EditAsync(Event _event);
         Task<OperationDetails> DeleteAsync(int id);
+        List<Event> Events();
     }
 }

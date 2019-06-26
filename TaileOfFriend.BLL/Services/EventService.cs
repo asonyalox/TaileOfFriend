@@ -77,5 +77,10 @@ namespace TaileOfFriend.BLL.Services
             await Database.SaveAsync();
             return new OperationDetails(true, "Подію видалено ", "");
         }
+
+        public List<Event> Events()
+        {
+            return Database.Events.All().ToList();
+        }
     }
 }

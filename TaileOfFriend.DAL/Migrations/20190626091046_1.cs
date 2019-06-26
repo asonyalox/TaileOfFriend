@@ -194,6 +194,36 @@ namespace TaileOfFriend.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EventName = table.Column<string>(nullable: true),
+                    Category = table.Column<string>(nullable: true),
+                    EventDates = table.Column<DateTime>(nullable: false),
+                    OwnerId = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    LocationId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Events_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Events_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Profiles",
                 columns: table => new
                 {
@@ -229,40 +259,28 @@ namespace TaileOfFriend.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Events",
+                name: "EventCategory",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    EventImageId = table.Column<int>(nullable: true),
-                    Category = table.Column<string>(nullable: true),
-                    EventDates = table.Column<DateTime>(nullable: false),
-                    OwnerUserId = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    LocationId = table.Column<int>(nullable: true)
+                    Id = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
+                    EventId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Events", x => x.Id);
+                    table.PrimaryKey("PK_EventCategory", x => new { x.EventId, x.CategoryId });
                     table.ForeignKey(
-                        name: "FK_Events_Images_EventImageId",
-                        column: x => x.EventImageId,
-                        principalTable: "Images",
+                        name: "FK_EventCategory_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Events_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
+                        name: "FK_EventCategory_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Events_Profiles_OwnerUserId",
-                        column: x => x.OwnerUserId,
-                        principalTable: "Profiles",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -290,40 +308,15 @@ namespace TaileOfFriend.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "EventCategory",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false),
-                    EventId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EventCategory", x => new { x.EventId, x.CategoryId });
-                    table.ForeignKey(
-                        name: "FK_EventCategory_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EventCategory_Events_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Events",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "04b1b194-89b0-4207-b855-8aeb9ba331bb", "94f89d9f-a417-41e7-9e65-530233eb3958", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "8622abcd-0e6e-45de-b2c5-4988d91a2b41", "a41fa750-5a51-4e52-a9c7-30e681c3b9cb", "Admin", "ADMIN" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5fa20698-18b4-4524-bbc4-10a122c16394", "315660ff-2ccf-4f70-91bb-53014b7b9973", "User", "USER" });
+                values: new object[] { "a7e19f0e-ea34-4bcc-a32e-73db655c3385", "79ecf85d-0c60-4f94-b094-ab00ca825e6e", "User", "USER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -370,19 +363,14 @@ namespace TaileOfFriend.DAL.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_EventImageId",
-                table: "Events",
-                column: "EventImageId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Events_LocationId",
                 table: "Events",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_OwnerUserId",
+                name: "IX_Events_OwnerId",
                 table: "Events",
-                column: "OwnerUserId");
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProfileCategory_ProfileId",
