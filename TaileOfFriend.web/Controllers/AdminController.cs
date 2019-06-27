@@ -30,7 +30,7 @@ namespace TaileOfFriend.web.Controllers
 
         public IActionResult Users() => View(ProfileService.Users());
 
-        public IActionResult Categories() => View(categoryService.GetAllCategories());
+        
 
         [HttpPost]
         public IActionResult AddCategory(string title)

@@ -1,5 +1,5 @@
-﻿@using TaileOfFriend.BLL.DTO
-@model IEnumerable<ProfileDTO>
+﻿@using TaileOfFriend.DAL.Enteties
+@model IEnumerable<Category>
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Users";
@@ -27,25 +27,27 @@
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
                             <li class=""><a href="#detail" data-toggle="tab">Адмінка</a></li>
-                            <li class=""><a asp-controller="Admin" asp-action="Users" data-toggle="tab">Редагування профілів</a></li>
+                            <li class=""><a asp-controller="Admin" asp-action="Users" data-toggle="tab">Редагування Категорій</a></li>
 
-                            <li class="active"><a href="#contact" data-toggle="tab">Створити подію</a></li>
+                            <li class="active"><a asp-controller="Category" asp-action="Category" data-toggle="tab">Редагування Категорій</a></li>
 
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <hr>
                             <div class="tab-pane fade active in" id="detail">
-                                <h4>Інформація профіля</h4>
+                                <h4>Перелік категорій</h4>
                                 <table class="table table-th-block">
-                                    <tr><th>Username</th><th>Email</th><th></th></tr>
-                                    @foreach (var user in Model)
+                                    <tr><th>Назва категорії</th><th></th></tr>
+                                    @foreach (var category in Model)
                                     {
                                         <tr>
-                                            <td>@user.UserName</td>
-                                            <td>@user.Email</td>
+                                            <td>@category.Name</td><td></td>
+                                            
                                             <td>
 
-                                                <form asp-controller="Profile" asp-action="Delete" asp-route-id="@user.Id" method="post">
+                                                
+
+                                                <form asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" method="post">
 
                                                     <button type="submit" class="btn btn-sm btn-danger">
                                                         Видалити
@@ -66,4 +68,4 @@
     </div>
 
 </div><!-- /.main -->
-</div><
+</div>
