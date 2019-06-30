@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaileOfFriend.DAL", "TaileO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaileOfFriend.BLL", "TaileOfFriend.BLL\TaileOfFriend.BLL.csproj", "{30FB5C79-7761-4E3A-8762-97B6CE548539}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaileOfFriendTest", "TaileOfFriendTest\TaileOfFriendTest.csproj", "{3107D7B5-CD05-4C4D-8B44-67D2F2B362F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{30FB5C79-7761-4E3A-8762-97B6CE548539}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30FB5C79-7761-4E3A-8762-97B6CE548539}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30FB5C79-7761-4E3A-8762-97B6CE548539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3107D7B5-CD05-4C4D-8B44-67D2F2B362F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3107D7B5-CD05-4C4D-8B44-67D2F2B362F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3107D7B5-CD05-4C4D-8B44-67D2F2B362F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3107D7B5-CD05-4C4D-8B44-67D2F2B362F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
