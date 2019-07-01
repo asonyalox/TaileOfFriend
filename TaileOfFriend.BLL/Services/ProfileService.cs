@@ -116,9 +116,9 @@ namespace TaileOfFriend.BLL.Services
             return new OperationDetails(true, "", "");
         }
 
-       
         
-        
+
+
 
         public void Dispose()
         {

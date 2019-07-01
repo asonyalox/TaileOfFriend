@@ -15,9 +15,4 @@
     <ProjectReference Include="..\TaileOfFriend.BLL\TaileOfFriend.BLL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Events\" />
-    <Folder Include="Views\Event\" />
-  </ItemGroup>
-
 </Project>

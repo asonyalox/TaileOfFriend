@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,21 +16,24 @@ namespace TaileOfFriend.web.Controllers
         private IEventService eventService;
         private IProfileService profileService;
         private ICategoryService categoryService;
+        private IMapper mapper;
 
         public EventController(
            IEventService _eventService,
            IProfileService _profileService,
-           ICategoryService _categoryService)
+           ICategoryService _categoryService,
+           IMapper _mapper            )
         {
             eventService = _eventService;
             profileService = _profileService;
             categoryService = _categoryService;
+            mapper = _mapper;
         }
 
         public IActionResult Index() => View();
 
-        public IActionResult Events() => View(eventService.Events());
-
+        public IActionResult Events() => View("Event" , eventService.GetAllEvents());
+        [Authorize]
         public IActionResult AddEvent()
         {
             EventViewModel eventModel = new EventViewModel
@@ -38,14 +43,25 @@ namespace TaileOfFriend.web.Controllers
             };
             return View(eventModel);
         }
-
-       /* [HttpPost]
+              
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddEvent(EventViewModel model)
         {
-            
-            ProfileDTO ProfileDTO = profileService.GetProfile(User.Identity.Name);
-        }*/
+            EventDTO eventDto = new EventDTO
+            {
+                EventName = model.EventName,
+                Location =model.Location,
+                Description = model.Description,
+                EventDates = model.EventDates,
+                OwnerId = model.OwnerId,
+                ImageUrl = model.ImageUrl
+            };
 
+            await eventService.Create(eventDto);
+            return RedirectToAction("Index", "Profile");
+        }
+        
         public IActionResult DeleteEvent(int event_id)
         {
             eventService.DeleteAsync(event_id);

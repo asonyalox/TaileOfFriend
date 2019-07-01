@@ -1,8 +1,10 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaileOfFriend.BLL.DTO;
 using TaileOfFriend.BLL.Infrasrtucture;
 using TaileOfFriend.BLL.Interfaces;
 using TaileOfFriend.DAL.Enteties;
@@ -19,23 +21,32 @@ namespace TaileOfFriend.BLL.Services
             Database = uow;
         }
 
+        public IEnumerable<EventDTO> Events()
+        {
+            var events = Database.Events.GetAll().ToList();
+
+            return Mapper.Map<IEnumerable<Event>, IEnumerable<EventDTO>>(events);
+        }
+
         public IEnumerable<Event> GetAllEvents() => Database.Events.All();
 
         public Event GetById(int id) => Database.Events.GetById(id);
 
-        public async Task<OperationDetails> CreateAsync(Event _event)
-        {
-            if (Database.Events.All().Any(c => c.EventName == _event.EventName))
-            {
-                return new OperationDetails(false, "Подія з такою назвою вже існує", "");
-            }
+         public async Task<OperationDetails> CreateAsync(Event _event)
+         {
+             if (Database.Events.All().Any(c => c.EventName == _event.EventName))
+             {
+                 return new OperationDetails(false, "Подія з такою назвою вже існує", "");
+             }
 
-            Database.Events.Insert(_event);
+             Database.Events.Insert(_event);
 
-            await Database.SaveAsync();
+             await Database.SaveAsync();
 
-            return new OperationDetails(true, "", "");
-        }
+             return new OperationDetails(true, "", "");
+         }
+
+        
 
         public async Task<OperationDetails> EditAsync(Event _event)
         {
@@ -61,6 +72,31 @@ namespace TaileOfFriend.BLL.Services
             return new OperationDetails(true, "", "");
         }
 
+        public async Task<OperationDetails> Create(EventDTO eventDto)
+        {
+            var _event = new Event
+            {
+                EventName = eventDto.EventName,
+                Location = eventDto.Location,
+                Description = eventDto.Description,
+                EventDates = eventDto.EventDates,
+                OwnerId = eventDto.OwnerId,
+                ImageUrl = eventDto.ImageUrl
+            };
+
+            foreach (var item in eventDto.Categories)
+            {
+                _event.EventCategories.Add(new EventCategory
+                {
+                    Event = _event,
+                    Category = Database.Categories.GetByTitle(item)
+                });
+            }
+            Database.Events.Insert(_event);
+            await Database.SaveAsync();
+            return new OperationDetails(true, "Ok", "");
+        }
+
         public async Task<OperationDetails> DeleteAsync(int id)
         {
             if (id == 0)
@@ -78,9 +114,6 @@ namespace TaileOfFriend.BLL.Services
             return new OperationDetails(true, "Подію видалено ", "");
         }
 
-        public List<Event> Events()
-        {
-            return Database.Events.All().ToList();
-        }
+        
     }
 }

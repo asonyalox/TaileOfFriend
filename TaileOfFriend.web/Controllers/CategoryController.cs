@@ -21,16 +21,16 @@ namespace TaileOfFriend.web.Controllers
 
 
         [HttpPost]
-        public IActionResult AddCategory(string name)
+        public IActionResult AddCategory(string title)
         {
-            categoryService.AddCategory(name);
-            return RedirectToAction("Categories", "Admin");
+            categoryService.AddCategory(title);
+            return RedirectToAction("Categories", "Category");
         }
 
         public IActionResult DeleteCategory(int id)
         {
             categoryService.DeleteAsync(id);
-            return RedirectToAction("Categories", "Admin");
+            return RedirectToAction("Categories", "Category");
         }
 
     }

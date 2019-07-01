@@ -15,7 +15,7 @@
                     <div class="panel-heading">
                         <header class="panel-title">
                             <div class="text-center">
-                                <strong>Редагування профілів</strong>
+                                <strong>Редагування категорій</strong>
                             </div>
                         </header>
                     </div>
@@ -26,8 +26,8 @@
                 <div class="panel">
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
-                            <li class=""><a href="#detail" data-toggle="tab">Адмінка</a></li>
-                            <li class=""><a asp-controller="Admin" asp-action="Users" data-toggle="tab">Редагування Категорій</a></li>
+                            <li class=""><a asp-controller="Admin" asp-action="Index" data-toggle="tab">Адмінка</a></li>
+                            <li class=""><a asp-controller="Admin" asp-action="Users" data-toggle="tab">Редагування профілів</a></li>
 
                             <li class="active"><a asp-controller="Category" asp-action="Category" data-toggle="tab">Редагування Категорій</a></li>
 
@@ -37,26 +37,29 @@
                             <div class="tab-pane fade active in" id="detail">
                                 <h4>Перелік категорій</h4>
                                 <table class="table table-th-block">
-                                    <tr><th>Назва категорії</th><th></th></tr>
-                                    @foreach (var category in Model)
-                                    {
-                                        <tr>
-                                            <td>@category.Name</td><td></td>
-                                            
-                                            <td>
+                                    
+                                   
+                                    
+                                        
+                                        <form asp-action="AddCategory" asp-controller="Category" method="post">
+                                            <input type="text" name="title" value="" />
+                                            <input type="submit" name="submit" value="Add" />
+                                        </form>
+                                        <ul class="ks-cboxtags">
+                                            @foreach (var item in Model)
+                                            {
+                                                <li>
+                                                    
 
-                                                
+                                                    <label for="checkbox @item.Id">@item.Name</label>
+                                                    @Html.ActionLink("Delete", "DeleteCategory", "Category", new { @id = item.Id }, new { @class = "btn btn-sm btn-danger" });
 
-                                                <form asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" method="post">
-
-                                                    <button type="submit" class="btn btn-sm btn-danger">
-                                                        Видалити
-                                                    </button>
-
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    }
+                                                </li>
+                                            }
+                                        </ul>
+                                        
+                                    
+                                    
                                 </table>
                             </div>
 

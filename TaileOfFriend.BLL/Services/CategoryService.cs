@@ -32,6 +32,10 @@ namespace TaileOfFriend.BLL.Services
 
         public OperationDetails AddCategory(string title)
         {
+            if(title == null)
+            {
+                return new OperationDetails(false, "Назва категорії не повинна бути пустою", "");
+            }
             Database.Categories.Insert(new Category() { Name = title });
             Database.SaveAsync();
             return new OperationDetails(true, "Ok", "");

@@ -20,6 +20,9 @@ namespace TaileOfFriend.DAL.Enteties
         public virtual Location Location { get; set; }
 
         public virtual User Owner { get; set; }
+        [Url]
+        public string ImageUrl { get; set; }
+
         
     }
 }

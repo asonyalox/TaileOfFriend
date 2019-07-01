@@ -7,5 +7,6 @@ namespace TaileOfFriend.DAL.Interfaces
 {
      public interface ICategoryRepository:IRepository<Category>
     {
+        Category GetByTitle(string title);
     }
 }

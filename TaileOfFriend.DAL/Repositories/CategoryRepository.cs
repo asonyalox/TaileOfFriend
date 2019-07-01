@@ -16,7 +16,10 @@ namespace TaileOfFriend.DAL.Repositories
 
         }
 
-        
+        public Category GetByTitle(string title)
+        {
+            return context.Categories.FirstOrDefault(x => x.Name == title);
+        }
 
 
     }

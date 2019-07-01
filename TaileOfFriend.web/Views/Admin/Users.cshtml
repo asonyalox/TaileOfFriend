@@ -26,10 +26,10 @@
                 <div class="panel">
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
-                            <li class=""><a href="#detail" data-toggle="tab">Адмінка</a></li>
+                            <li class=""><a asp-controller="Admin" asp-action="Index" data-toggle="tab">Адмінка</a></li>
                             <li class="active"><a asp-controller="Admin" asp-action="Users" data-toggle="tab">Редагування профілів</a></li>
 
-                            <li class=""><a href="#contact" data-toggle="tab">Створити подію</a></li>
+                            <li class=""><a asp-controller="Category" asp-action="Category" data-toggle="tab">Створити подію</a></li>
 
                         </ul>
                         <div id="myTabContent" class="tab-content">

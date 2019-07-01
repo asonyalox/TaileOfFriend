@@ -21,9 +21,11 @@ namespace TaileOfFriend.web.ViewModel
 
         public List<string> SelectedCategories { get; set; }
         public List<Category> Categories { get; set; }
-
+        public Location Location { get; set; }
         public string OwnerId { get; set; }
 
         public string Description { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }
