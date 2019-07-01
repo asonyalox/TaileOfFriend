@@ -20,18 +20,32 @@ namespace TaileOfFriendTest
         
 
         [Fact]
-        public async Task<OperationDetails> CreateAsync_EmailNotExisting_ReturnTrue()
+        public async Task<ArgumentNullException> CreateAsync_EmailNotExisting_ReturnFalse()
         {
             //arrange
             var mock = new Mock<IUnitOfWork>();
             var service = new UserService(mock.Object);
-            var newUser = new UserDTO { Email = "asonyalox@gmail.com" };
+            var newUser = new UserDTO { Email = null };
 
             //act
             var result = await service.CreateAsync(newUser);
 
             //assert
-           return Assert.IsType<OperationDetails>(result);
+            return await Assert.ThrowsAsync<ArgumentNullException>(() => service.CreateAsync(newUser));
+        }
+
+        [Fact]
+        public async Task Delete_UserDeleted()
+        {/*
+            //arrange
+            var mock = new Mock<IUnitOfWork>();
+            var service = new UserService(mock.Object);
+            var newUser = new UserDTO { Id="aaaaaaaaaaaaa", Email = "asonyalox@gmail.com" };
+            //act
+            var result = await service.Delete(newUser.Id);
+
+            //assert
+             */
         }
     }
 }
