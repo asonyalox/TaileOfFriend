@@ -15,6 +15,13 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <style>
+        body {
+            background-image: url('/images/backgraundimage.jpg');
+            background-color: #c7b39b;
+        }
+    </style>
+
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -33,7 +40,9 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a asp-controller="Profile" asp-action="Index">My profile</a></li>
+                        <li><a asp-controller="Event" asp-action="Events">Events</a></li>
                         <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+
                         @if (User.IsInRole("Admin"))
                         {
                             <li><a asp-controller="Admin" asp-action="Index">Admin</a></li>

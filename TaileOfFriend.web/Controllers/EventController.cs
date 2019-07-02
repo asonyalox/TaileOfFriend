@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TaileOfFriend.BLL.DTO;
 using TaileOfFriend.BLL.Interfaces;
+using TaileOfFriend.DAL.Enteties;
 using TaileOfFriend.web.ViewModel;
 
 namespace TaileOfFriend.web.Controllers
@@ -32,7 +33,7 @@ namespace TaileOfFriend.web.Controllers
 
         public IActionResult Index() => View();
 
-        public IActionResult Events() => View("Event" , eventService.GetAllEvents());
+        public IActionResult Events() => View("Events" , eventService.GetAllEvents());
         [Authorize]
         public IActionResult AddEvent()
         {
@@ -47,18 +48,10 @@ namespace TaileOfFriend.web.Controllers
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> AddEvent(EventViewModel model)
-        {
-            EventDTO eventDto = new EventDTO
-            {
-                EventName = model.EventName,
-                Location =model.Location,
-                Description = model.Description,
-                EventDates = model.EventDates,
-                OwnerId = model.OwnerId,
-                ImageUrl = model.ImageUrl
-            };
+        {       
+            
 
-            await eventService.Create(eventDto);
+            await eventService.Create(model.EventName,model.Location,model.Description,model.EventDates,model.OwnerId);
             return RedirectToAction("Index", "Profile");
         }
         

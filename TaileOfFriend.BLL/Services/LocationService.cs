@@ -25,6 +25,11 @@ namespace TaileOfFriend.BLL.Services
 
         public async Task<OperationDetails> CreateAsync(Location location)
         {
+            if (location.Loc == null)
+            {
+                return new OperationDetails(false, "Назва не може бути пустою", "");
+            }
+
             if (Database.Locations.All().Any(c => c.Loc == location.Loc))
             {
                 return new OperationDetails(false, "Дана локація вже існує", "");

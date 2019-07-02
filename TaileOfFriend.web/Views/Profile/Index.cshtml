@@ -43,8 +43,8 @@
                             <li class=""><a asp-controller="Profile" asp-action="Edit"  data-toggle="tab">Редагувати профіль</a></li>
                             @if (User.Identity.IsAuthenticated)
                             {
-                            <li class=""><a href="#contact" data-toggle="tab">Створити подію</a></li>
-                            <li class=""><a href="#contact" data-toggle="tab">Створити подію</a></li>
+                            <li class=""><a asp-controller="Event" asp-action="AddEvent" data-toggle="tab">Створити подію</a></li>
+                            
                             }
                         </ul>
                         <div id="myTabContent" class="tab-content">

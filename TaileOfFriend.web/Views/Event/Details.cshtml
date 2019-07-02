@@ -1,0 +1,21 @@
+﻿
+@model EventViewModel
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 well text-center">
+        <div class="thumbnail">
+            
+            
+            <br />
+            <br />
+            <h2><strong>@Model.EventName</strong></h2>
+            
+            <p><strong>@Model.Location</strong></p>
+            <p>@Model.EventDates.ToShortDateString()</p>
+            <p>@Model.Description</p>
+
+            
+        </div>
+        
+        
+    </div>
+</div>

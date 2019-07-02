@@ -1,0 +1,60 @@
+﻿@using  TaileOfFriend.DAL.Enteties
+@model EventViewModel
+@{
+    ViewData["Title"] = "CreateEvents";
+}
+
+
+
+<div class="panel">
+    <div class="panel-body">
+        <ul id="myTab" class="nav nav-pills">
+            <li class=""><a href="#detail" data-toggle="tab">Про користувача</a></li>
+            <li class=""><a asp-controller="Profile" asp-action="Edit" data-toggle="tab">Редагувати профіль</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="фсе"><a asp-controller="Event" asp-action="AddEvent" data-toggle="tab">Створити подію</a></li>
+
+            }
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <hr>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <form method="post">
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="EventName"></label>
+                            <input asp-for="EventName" class="form-control" />
+                            <span asp-validation-for="EventName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Location"></label>
+                            <input asp-for="Location" class="form-control" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="Description"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EventDates"></label>
+                            <input asp-for="EventDates" class="form-control" />
+                            <span asp-validation-for="EventDates" class="text-danger"></span>
+                        </div>
+                        
+                        
+                        <br />
+                        <button type="submit" class="btn btn-primary">Create/Update</button>
+                        <a href='javascript:history.go(-1)' class="btn btn-default">Cancel</a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

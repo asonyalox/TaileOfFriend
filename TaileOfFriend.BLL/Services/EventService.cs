@@ -10,6 +10,8 @@ using TaileOfFriend.BLL.Interfaces;
 using TaileOfFriend.DAL.Enteties;
 using TaileOfFriend.DAL.Interfaces;
 
+
+
 namespace TaileOfFriend.BLL.Services
 {
     public class EventService:IEventService
@@ -72,26 +74,19 @@ namespace TaileOfFriend.BLL.Services
             return new OperationDetails(true, "", "");
         }
 
-        public async Task<OperationDetails> Create(EventDTO eventDto)
+        public async Task<OperationDetails> Create(string EventName,Location Location,string Description,DateTime EventDates,string OwnerId)
         {
             var _event = new Event
             {
-                EventName = eventDto.EventName,
-                Location = eventDto.Location,
-                Description = eventDto.Description,
-                EventDates = eventDto.EventDates,
-                OwnerId = eventDto.OwnerId,
-                ImageUrl = eventDto.ImageUrl
+                EventName = EventName,
+                Location = Location,
+                Description = Description,
+                EventDates = EventDates,
+                OwnerId = OwnerId,
+              
             };
 
-            foreach (var item in eventDto.Categories)
-            {
-                _event.EventCategories.Add(new EventCategory
-                {
-                    Event = _event,
-                    Category = Database.Categories.GetByTitle(item)
-                });
-            }
+           
             Database.Events.Insert(_event);
             await Database.SaveAsync();
             return new OperationDetails(true, "Ok", "");
