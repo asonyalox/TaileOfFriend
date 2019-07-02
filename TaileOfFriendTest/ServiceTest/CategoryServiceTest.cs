@@ -20,13 +20,13 @@ namespace TaileOfFriendTest.SeviceTest
             
             var service = new CategoryService(mock.Object);
             var newCategory = new Category { Name=null };
-            mock.Setup(uow => uow.Categories.Insert(newCategory));
+            mock.Setup(uow => uow.Categories.Insert(It.IsAny<Category>()));
             //act
             var result =  service.AddCategory(newCategory.Name);
             
             //asert
             
-             Assert.False( result.Succedeed);
+             Assert.False(result.Succedeed);
 
         }
 
@@ -37,7 +37,7 @@ namespace TaileOfFriendTest.SeviceTest
             var mock = new Mock<IUnitOfWork>();
             var service = new CategoryService(mock.Object);
             var newCategory = new Category { Name = "asdasdasd" };
-            mock.Setup(uow => uow.Categories.Insert(newCategory));
+            mock.Setup(uow => uow.Categories.Insert(It.IsAny<Category>()));
             //act
             var result = service.AddCategory(newCategory.Name);
 
@@ -58,9 +58,11 @@ namespace TaileOfFriendTest.SeviceTest
             //act
             var result = await service.DeleteAsync(1);
 
-            //assert
-             Assert.True(result.Succedeed);
+           
 
+            //assert
+            Assert.True(result.Succedeed);
+             
         }
 
         private List<Category> GetTestCategory()
@@ -71,7 +73,7 @@ namespace TaileOfFriendTest.SeviceTest
             };
             return categories;
         }
-        /*
+        
         [Fact]
         public void Categories_returnList()
         {
@@ -86,9 +88,9 @@ namespace TaileOfFriendTest.SeviceTest
             var result = service.Categories();
 
             //assert
-            Assert.l(List<Category>);
+            Assert.NotEmpty(result);
 
         }
-        */
+        
     }
 }
