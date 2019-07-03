@@ -7,12 +7,12 @@
 
 
 
-<div class="container">
-    <div id="main">
+<div class="container bg-opacity" >
+    <div id="main" >
 
 
-        <div class="row" id="real-estates-detail">
-            <div class="col-lg-4 col-md-4 col-xs-12">
+        <div class="row" id="real-estates-detail" >
+            <div class="col-lg-4 col-md-4 col-xs-12" >
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <header class="panel-title">
@@ -27,10 +27,14 @@
                             {
                                 <img width="200px" height="200px" src="~/images/defaultPhoto.png" />
                             }
+                            else
+                            {
+                                <img width="200px" height="200px" src="@Model.Image" />
+                            }
                             <h3>@Html.DisplayFor(model => model.UserName)</h3>
-                            <form asp-controller="ProfileController" asp-action="ChangeImage">
-                            <a  href="#addphoto" data-toggle="tab">Редагувати</a>
-                            </form>
+
+                            <a asp-controller="Profile" asp-action="ChangeImage" data-toggle="tab">Редагувати</a>
+
                         </div>
                     </div>
                 </div>
@@ -41,11 +45,10 @@
                         <ul id="myTab" class="nav nav-pills">
                             <li class="active"><a href="#detail" data-toggle="tab">Про користувача</a></li>
                             <li class=""><a asp-controller="Profile" asp-action="Edit"  data-toggle="tab">Редагувати профіль</a></li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
+                           
                             <li class=""><a asp-controller="Event" asp-action="AddEvent" data-toggle="tab">Створити подію</a></li>
                             
-                            }
+                            
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <hr>

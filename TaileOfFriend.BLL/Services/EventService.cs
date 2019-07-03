@@ -23,12 +23,7 @@ namespace TaileOfFriend.BLL.Services
             Database = uow;
         }
 
-        public IEnumerable<EventDTO> Events()
-        {
-            var events = Database.Events.GetAll().ToList();
-
-            return Mapper.Map<IEnumerable<Event>, IEnumerable<EventDTO>>(events);
-        }
+        
 
         public IEnumerable<Event> GetAllEvents() => Database.Events.All();
 

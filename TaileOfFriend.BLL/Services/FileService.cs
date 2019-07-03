@@ -24,7 +24,7 @@ namespace TaileOfFriend.BLL.Services
 
         public async Task<Image> AddImage(IFormFile uploadedFile)
         {
-            if (uploadedFile != null)
+            if (uploadedFile == null)
             {
                 throw (new Exception("Файл не знайдено"));
 

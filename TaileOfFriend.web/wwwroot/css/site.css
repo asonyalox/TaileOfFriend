@@ -3,6 +3,9 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+
+    background-image: url('/images/backgraundimage.jpg');
+    background-color: #c7b39b;
 }
 
 /* Wrapping element */
@@ -10,6 +13,9 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+.bg-opacity {
+    background-color: rgba(255,255,255,0.95)
 }
 
 /* Carousel */

@@ -53,9 +53,9 @@ namespace TaileOfFriend.web.Controllers
         public async Task<IActionResult> ChangeImage()
         {
             User currentUser = await userService.GetCurrentUserAsync(HttpContext);
-            ChangeImageViewModel model = new ChangeImageViewModel { UserId = currentUser.ProfileId };
+            ChangeImageViewModel model = new ChangeImageViewModel { UserId = currentUser.Id };
 
-            return RedirectToAction("Index", "Profile");
+            return View(model);
         }
 
         [HttpPost]
@@ -69,8 +69,8 @@ namespace TaileOfFriend.web.Controllers
                 var result = await profileService.ChangeImage(model.UserId, newImage);
                 if (result.Succedeed)
                 {
-                    await fileService.Delete(Int32.Parse(result.Message));
-                    return Ok(newImage.Url);
+                   
+                    return RedirectToAction("Index");
                 }
             }
 

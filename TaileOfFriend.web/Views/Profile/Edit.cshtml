@@ -5,7 +5,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<div class="container">
+<div class="container bg-opacity">
     <div id="main">
 
 
@@ -28,10 +28,9 @@
                         <ul id="myTab" class="nav nav-pills">
                             <li class=""><a  asp-controller="Profile" asp-action="Index" data-toggle="tab">Про користувача</a></li>
                             <li class="active"><a asp-controller="Profile" asp-action="Edit" data-toggle="tab">Редагувати профіль</a></li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li class=""><a href="#contact" data-toggle="tab">Створити подію</a></li>
-                            }
+                           
+                                <li class=""><a asp-controller="Event" asp-action="AddEvent" data-toggle="tab">Створити подію</a></li>
+                            
                         </ul>
                         <form method="post" asp-controller="Profile" asp-action="Edit">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>

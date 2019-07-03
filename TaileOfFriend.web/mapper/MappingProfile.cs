@@ -18,6 +18,7 @@ namespace TaileOfFriend.web.mapper
             CreateMap<ProfileDTO, ProfileViewModel>()
                .ForMember(dest => dest.UserName, opts => opts.MapFrom(src => src.UserName))
                .ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.Email))
+               .ForMember(dest => dest.Image, opts => opts.MapFrom(src => src.ImageUrl))
                .ForMember(dest => dest.Age, opts => opts.MapFrom(src => (DateTime.Today.Year - src.Birthday.Year)));
 
             CreateMap<EditProfileViewModel, ProfileDTO>()

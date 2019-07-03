@@ -63,16 +63,12 @@ namespace TaileOfFriend.BLL.Services
             }
 
 
-            int oldImageId = profile.Image.Id;
+            
 
             profile.Image = newImage;
             Database.ProfileRepository.Update(profile);
 
-            var oldImage = Database.Images.GetById(oldImageId);
-            if (oldImage != null)
-            {
-                Database.Images.Delete(oldImage);
-            }
+            
 
             await Database.SaveAsync();
             return new OperationDetails(true, "", "");
